@@ -1,0 +1,42 @@
+{
+  "userPreferences": {
+    "favoriteForums": ["BestBlackHatForum"],
+    "domains": ["SEO", "黑帽技术", "流量套利", "自动化工具"],
+    "lastUsedDomain": "黑帽SEO"
+  },
+  "forumCredentials": {
+    "bestblackhatforum.com": {
+      "username": "",
+      "password": "",
+      "lastLogin": "",
+      "loginCount": 1,
+      "cookies": null,
+      "localStorage": null,
+      "sessionValid": true
+    }
+  },
+  "crawledResources": [
+    {
+      "url": "",
+      "title": "",
+      "forum": "",
+      "author": "",
+      "timestamp": ,
+      "hash": ""
+    }
+    
+  ],
+  "antiDetection": {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "userAgent": "",
+    "timezone": ",
+    "locale": "",
+    "randomDelayRange": [5000, 30000],
+    "maxLoginPerDay": 3,
+    "reuseSession": true,
+    "sessionExpiryHours": 24
+  }
+}
