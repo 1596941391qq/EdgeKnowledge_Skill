@@ -4,6 +4,16 @@ AI-powered edge knowledge mining system. Intelligently recommends high-value for
 
 ## 🎯 Core Philosophy
 
+> **💡 Knowledge Equity Initiative**
+> This project encourages community contributions! You can create branches on Git to build domain-specific search expert skills (e.g., SEO Expert, Affiliate Hunter, Tool Digger), making edge knowledge accessible to more people.
+>
+> **🤝 How to Contribute PRs**:
+> - 🌿 **Build Domain-Specific Branches** - Create specialized versions for specific domains (e.g., `seo-expert`, `affiliate-hunter`)
+> - 🔧 **Optimize Existing Skill** - Improve tool versatility and robustness (anti-scraping strategies, error handling, performance optimization)
+> - 📚 **Share Quality Forums** - Add deep-dive forums you use to `forum_database.json` with search strategies
+>
+> Let's break information barriers and promote knowledge equity together! 🚀
+
 ### What is Edge Knowledge?
 
 In the AI era, information that LLMs can easily understand or collect from the internet is considered common knowledge. Edge knowledge refers to scarce, industry know-how, and gray/black hat techniques that reach the boundaries of platform rules.
