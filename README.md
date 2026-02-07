@@ -117,25 +117,8 @@ Claude分析 → 生成报告 → 更新 memory.json
 ```
 ### 参考截图
 
-##### 以下是开发思路截图：
-<!-- 这是一张图片，ocr 内容为： -->
-![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770386664324-fed3a957-ddd3-4da9-a36e-d49691a00559.png)
-
-##### 以下实践截图：
-
-
 <!-- 这是一张图片，ocr 内容为： -->
 ![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384664181-3508fcfa-012e-45b9-a3b3-43f343c4ad21.png)
-
-<!-- 这是一张图片，ocr 内容为： -->
-![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384674270-c8110508-55fa-4d19-a6b5-8c11a11cfb5d.png)
-
-<!-- 这是一张图片，ocr 内容为： -->
-![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384812309-ff88d32e-5e86-4a33-afc9-1db837575ce4.png)
-
-<!-- 这是一张图片，ocr 内容为： -->
-![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384812447-77279fd3-bfd9-4132-b730-3f7b08637681.png)
-
 <!-- 这是一张图片，ocr 内容为： -->
 ![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384830572-2db0ae2f-2b82-4077-bff1-8e04658d708a.png)<!-- 这是一张图片，ocr 内容为： -->
 ![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384935540-1488fc21-351a-4515-ad6f-0431e20ba6ec.png)
