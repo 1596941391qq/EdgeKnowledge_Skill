@@ -1,0 +1,186 @@
+{
+  "categories": {
+    "问题型检索": {
+      "description": "适合挖掘评论区深度讨论和真实用户反馈",
+      "forums": [
+        {
+          "name": "Reddit",
+          "url": "https://reddit.com",
+          "rating": 10,
+          "cost": "免费",
+          "reason": "即使AI经常引用reddit，但它往往更大的价值藏在评论区里",
+          "适合人群": "所有人",
+          "tags": ["问答", "评论区", "真实反馈", "社区讨论"]
+        }
+      ]
+    },
+    "边缘知识检索": {
+      "description": "适合挖掘主流渠道找不到的灰色/黑帽技巧",
+      "forums": [
+        {
+          "name": "BestBlackHatForum",
+          "url": "https://bestblackhatforum.com",
+          "rating": 9.5,
+          "cost": "免费",
+          "reason": "骚东西确实多，推荐看slenderman的帖子",
+          "适合人群": "所有人",
+          "tags": ["黑帽", "灰色技巧", "边缘知识", "高级技术"],
+          "推荐作者": ["slenderman"]
+        }
+      ]
+    },
+    "高自由度深度论坛": {
+      "description": "信息焦虑时想看点别人不知道的深度内容",
+      "forums": [
+        {
+          "rank": 1,
+          "name": "GreyHatMafia",
+          "url": "https://greyhatmafia.com",
+          "rating": 9.5,
+          "cost": "免费",
+          "适合人群": "所有人",
+          "tags": ["灰帽", "综合营销", "高质量"]
+        },
+        {
+          "rank": 2,
+          "name": "AffLIFT",
+          "url": "https://afflift.com",
+          "rating": 9.5,
+          "cost": "$20/月",
+          "适合人群": "Affiliate新手到进阶",
+          "tags": ["联盟营销", "Affiliate", "进阶"]
+        },
+        {
+          "rank": 3,
+          "name": "StackThatMoney",
+          "url": "https://stackthatmoney.com",
+          "rating": 9.5,
+          "cost": "$99/月",
+          "适合人群": "专业Affiliate",
+          "tags": ["联盟营销", "Affiliate", "专业级", "高端"]
+        },
+        {
+          "rank": 4,
+          "name": "SEO Isn't Dead",
+          "url": "https://seoisntdead.com",
+          "rating": 9,
+          "cost": "免费",
+          "适合人群": "SEO从业者",
+          "tags": ["SEO", "搜索引擎优化", "技术"]
+        },
+        {
+          "rank": 5,
+          "name": "iAmAffiliate",
+          "url": "https://iamaffiliate.com",
+          "rating": 9,
+          "cost": "$50/月",
+          "适合人群": "高级Affiliate",
+          "tags": ["联盟营销", "Affiliate", "高级"]
+        },
+        {
+          "rank": 6,
+          "name": "BlackHatWorld",
+          "url": "https://blackhatworld.com",
+          "rating": 8.5,
+          "cost": "免费",
+          "适合人群": "综合营销",
+          "tags": ["黑帽", "综合营销", "流量", "SEO"]
+        },
+        {
+          "rank": 7,
+          "name": "BossCourses",
+          "url": "https://bosscourses.com",
+          "rating": 8.5,
+          "cost": "$35/课程",
+          "适合人群": "课程学习者",
+          "tags": ["课程", "学习", "教程"]
+        },
+        {
+          "rank": 8,
+          "name": "WickedFire",
+          "url": "https://wickedfire.com",
+          "rating": 8,
+          "cost": "免费",
+          "适合人群": "Affiliate新手",
+          "tags": ["联盟营销", "Affiliate", "新手"]
+        },
+        {
+          "rank": 9,
+          "name": "Affiliate World",
+          "url": "https://affiliateworld.com",
+          "rating": 8,
+          "cost": "$99/月",
+          "适合人群": "高端Networking",
+          "tags": ["联盟营销", "Affiliate", "人脉", "高端"]
+        },
+        {
+          "rank": 10,
+          "name": "Cracked.to",
+          "url": "https://cracked.to",
+          "rating": 7.5,
+          "cost": "免费",
+          "适合人群": "工具需求者",
+          "tags": ["工具", "破解", "资源"]
+        },
+        {
+          "rank": 11,
+          "name": "OneHack",
+          "url": "https://onehack.us",
+          "rating": 7.5,
+          "cost": "免费",
+          "适合人群": "技术+营销",
+          "tags": ["技术", "营销", "综合"]
+        },
+        {
+          "rank": 12,
+          "name": "Digital Point",
+          "url": "https://digitalpoint.com",
+          "rating": 7,
+          "cost": "免费",
+          "适合人群": "新手入门",
+          "tags": ["新手", "入门", "综合"]
+        },
+        {
+          "rank": 13,
+          "name": "Warrior Forum",
+          "url": "https://warriorforum.com",
+          "rating": 7,
+          "cost": "免费",
+          "适合人群": "产品调研",
+          "tags": ["产品", "调研", "营销"]
+        },
+        {
+          "rank": 14,
+          "name": "Nulled.to",
+          "url": "https://nulled.to",
+          "rating": 7,
+          "cost": "免费",
+          "适合人群": "工具需求者",
+          "tags": ["工具", "破解", "资源"]
+        }
+      ]
+    }
+  },
+  "search_strategies": {
+    "INS刷流量刷粉丝": {
+      "keywords": ["ins", "instagram", "刷流量", "刷粉丝", "instagram growth", "instagram followers", "instagram engagement", "SMM panel", "social media marketing"],
+      "recommended_forums": ["GreyHatMafia", "BlackHatWorld", "Reddit", "BestBlackHatForum"],
+      "focus": "评论区真实反馈和灰色技巧"
+    },
+    "SEO技巧": {
+      "keywords": ["SEO", "backlinks", "link building", "search engine optimization"],
+      "recommended_forums": ["SEO Isn't Dead", "BlackHatWorld", "GreyHatMafia"],
+      "focus": "最新算法和黑帽技巧"
+    },
+    "联盟营销": {
+      "keywords": ["affiliate marketing", "CPA", "media buying", "traffic sources"],
+      "recommended_forums": ["AffLIFT", "StackThatMoney", "iAmAffiliate", "WickedFire"],
+      "focus": "实战案例和流量源"
+    },
+    "工具资源": {
+      "keywords": ["tools", "software", "automation", "bots"],
+      "recommended_forums": ["Cracked.to", "Nulled.to", "OneHack", "BestBlackHatForum"],
+      "focus": "破解工具和自动化脚本"
+    }
+  }
+}

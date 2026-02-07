@@ -1,0 +1,36 @@
+# 报告目录（包含爬取的内容）
+reports/
+
+# 备份目录
+backup*/
+
+# 记忆文件（可能包含敏感信息如账号密码）
+memory.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.log
