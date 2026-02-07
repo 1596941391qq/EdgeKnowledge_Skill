@@ -44,6 +44,93 @@ AI驱动的边缘知识挖掘系统。针对用户需求，从高价值论坛（
 cp -r edge-knowledge-hunter ~/.claude/skills/
 ```
 
+## ⚙️ 配置文件说明
+
+### 1. forum_database.json
+
+论坛知识库，包含论坛信息和搜索策略。
+
+**结构说明**:
+```json
+{
+  "categories": {
+    "问题型检索": {
+      "description": "适合挖掘评论区深度讨论和真实用户反馈",
+      "forums": [...]
+    },
+    "边缘知识检索": {
+      "description": "适合挖掘主流渠道找不到的灰色/黑帽技巧",
+      "forums": [...]
+    },
+    "高自由度深度论坛": {
+      "description": "信息焦虑时想看点别人不知道的深度内容",
+      "forums": [...]
+    }
+  },
+  "search_strategies": {
+    "INS刷流量刷粉丝": {
+      "keywords": [...],
+      "recommended_forums": [...],
+      "focus": "评论区真实反馈和灰色技巧"
+    }
+  }
+}
+```
+
+**使用方式**:
+- 系统会自动读取此文件来推荐论坛
+- 你可以添加新的论坛或搜索策略
+- 每个论坛包含：名称、URL、评分、成本、适合人群、标签
+
+### 2. memory.json.template
+
+用户偏好和爬取历史的模板文件。首次使用时复制为 `memory.json`：
+
+```bash
+cp memory.json.template memory.json
+```
+
+**结构说明**:
+```json
+{
+  "userPreferences": {
+    "favoriteForums": ["BestBlackHatForum"],
+    "domains": ["SEO", "黑帽技术", "流量套利"],
+    "lastUsedDomain": "黑帽SEO"
+  },
+  "forumCredentials": {
+    "bestblackhatforum.com": {
+      "username": "",
+      "password": "",
+      "lastLogin": "",
+      "loginCount": 1,
+      "cookies": null,
+      "localStorage": null,
+      "sessionValid": true
+    }
+  },
+  "crawledResources": [],
+  "antiDetection": {
+    "viewport": {"width": 1920, "height": 1080},
+    "userAgent": "",
+    "timezone": "",
+    "locale": "",
+    "randomDelayRange": [5000, 30000],
+    "maxLoginPerDay": 3,
+    "reuseSession": true,
+    "sessionExpiryHours": 24
+  }
+}
+```
+
+**字段说明**:
+- `userPreferences`: 你喜欢的论坛和领域
+- `forumCredentials`: 论坛登录凭证（当你提供账号密码时自动保存）
+- `crawledResources`: 已爬取的 URL 历史（防止重复爬取）
+- `antiDetection`: 防风控配置（视口、延迟、登录限制等）
+
+**隐私说明**: `memory.json` 已在 `.gitignore` 中，不会被提交到 Git。你的账号密码安全地保存在本地。
+
 ## 🚀 使用方法
 
 ### 基本用法
