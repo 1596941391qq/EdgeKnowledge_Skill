@@ -1,10 +1,10 @@
 ---
-name: edge-knowledge-hunter
+name: Edge Knowledge
 description: > 
   AI驱动的边缘知识挖掘系统。针对用户需求，从高价值论坛（Reddit、BlackHatWorld、GreyHatMafia 等）智能推荐 + browser-use 深度爬取 + 视觉识别 + 分析边缘技巧、骚人、资源，并输出单一结构化 Markdown 报告。
-license: MIT  # 或 CC-BY-NC-SA 4.0（因为涉及灰色内容，建议非商用）
+license: MIT  # 或 CC-BY-NC-SA 4.0
 version: 1.0.0
-author: 黑咖啡和冰月亮 (@weihacking)
+author: 黑咖啡和冰月亮 (@weihackings)
 tags: [forum-crawler, edge-knowledge, blackhat, affiliate, browser-automation, visual-analysis]
 categories: [research, marketing-intelligence, gray-area]
 ---

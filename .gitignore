@@ -1,3 +1,4 @@
+.claude/
 # 报告目录（包含爬取的内容）
 reports/
 
@@ -34,3 +35,4 @@ Thumbs.db
 # 临时文件
 *.tmp
 *.log
+
