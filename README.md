@@ -1,6 +1,6 @@
 # Edge Knowledge Hunter
 
-> **[中文文档 Chinese Documentation](./README_CN.md)** | **English Documentation**
+> **[Chinese Documentation](./README_CN.md)** | **English Documentation**
 
 AI-powered edge knowledge mining system. Intelligently recommends high-value forums (Reddit, BlackHatWorld, GreyHatMafia, etc.) based on user needs, performs deep crawling with browser-use, visual recognition, and analyzes edge tactics, power users, and resources, outputting a single structured Markdown report.
 
@@ -67,21 +67,21 @@ The forum knowledge base containing forum information and search strategies.
 ```json
 {
   "categories": {
-    "问题型检索": {
+    "Q&A_Search": {
       "description": "Suitable for mining deep discussions and real user feedback in comment sections",
       "forums": [...]
     },
-    "边缘知识检索": {
+    "Edge_Knowledge_Search": {
       "description": "Suitable for mining gray/black hat techniques not found in mainstream channels",
       "forums": [...]
     },
-    "高自由度深度论坛": {
+    "Deep_Dive_Forums": {
       "description": "Deep content that others don't know about",
       "forums": [...]
     }
   },
   "search_strategies": {
-    "INS刷流量刷粉丝": {
+    "Instagram_Growth": {
       "keywords": [...],
       "recommended_forums": [...],
       "focus": "Real feedback in comment sections and gray techniques"
@@ -108,8 +108,8 @@ cp memory.json.template memory.json
 {
   "userPreferences": {
     "favoriteForums": ["BestBlackHatForum"],
-    "domains": ["SEO", "黑帽技术", "流量套利"],
-    "lastUsedDomain": "黑帽SEO"
+    "domains": ["SEO", "Black Hat Techniques", "Traffic Arbitrage"],
+    "lastUsedDomain": "Black Hat SEO"
   },
   "forumCredentials": {
     "bestblackhatforum.com": {
@@ -279,7 +279,7 @@ MIT License
 
 ## 👤 Author
 
-黑咖啡和冰月亮 (@weihackings)
+黑咖啡和冰月亮 / Black Coffee & Ice Moon (@weihackings)
 
 ## 🤝 Contributing
 
@@ -289,18 +289,7 @@ Issues and Pull Requests are welcome!
 
 [![Star History Chart](https://api.star-history.com/svg?repos=1596941391qq/EdgeKnowledge_Skill&type=Date)](https://star-history.com/#1596941391qq/EdgeKnowledge_Skill&Date)
 
-## 📝 Changelog
 
-### v1.0.0 (2026-02-07)
-- 🎉 Initial release
-- ✨ AI-powered forum recommendation system
-- 🌐 Smart browser crawling with browser-use integration
-- 🔍 Three-layer analysis: Edge Knowledge, Power Users, Resources
-- 🔐 Credential management and session reuse
-- 🛡️ Anti-detection system with fingerprint management
-- 📊 Structured Markdown report generation
-- 🌍 Bilingual documentation (English & Chinese)
-- 📚 14+ high-value forums in database
 
 ## ❓ FAQ
 

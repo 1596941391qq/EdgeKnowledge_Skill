@@ -290,18 +290,7 @@ MIT License
 
 [![Star History Chart](https://api.star-history.com/svg?repos=1596941391qq/EdgeKnowledge_Skill&type=Date)](https://star-history.com/#1596941391qq/EdgeKnowledge_Skill&Date)
 
-## 📝 更新日志
 
-### v1.0.0 (2026-02-07)
-- 🎉 首次发布
-- ✨ AI 驱动的论坛推荐系统
-- 🌐 智能浏览器爬取，集成 browser-use
-- 🔍 三层分析：边缘知识、骚人、资源
-- 🔐 凭证管理和会话复用
-- 🛡️ 防风控系统，指纹管理
-- 📊 结构化 Markdown 报告生成
-- 🌍 双语文档（英文和中文）
-- 📚 数据库包含 14+ 个高价值论坛
 
 ## ❓ 常见问题
 
