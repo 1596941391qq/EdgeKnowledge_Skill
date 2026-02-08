@@ -1,79 +1,82 @@
-# Edge Knowledge Hunter - 边缘知识猎人
+# Edge Knowledge Hunter
 
-AI驱动的边缘知识挖掘系统。针对用户需求，从高价值论坛（Reddit、BlackHatWorld、GreyHatMafia 等）智能推荐 + browser-use 深度爬取 + 视觉识别 + 分析边缘技巧、骚人、资源，并输出单一结构化 Markdown 报告。
+> **[中文文档 Chinese Documentation](./README_CN.md)** | **English Documentation**
 
-## 🎯 核心理念
+AI-powered edge knowledge mining system. Intelligently recommends high-value forums (Reddit, BlackHatWorld, GreyHatMafia, etc.) based on user needs, performs deep crawling with browser-use, visual recognition, and analyzes edge tactics, power users, and resources, outputting a single structured Markdown report.
 
-> **💡 知识平权倡议**
-> 本项目鼓励社区贡献！你可以在 Git 上开分支，打造不同领域的搜索专家 skill（如 SEO 专家、Affiliate 专家、工具挖掘专家等），让边缘知识触达更多人。
+## 🎯 Core Philosophy
+
+> **💡 Knowledge Equity Initiative**
+> This project encourages community contributions! You can create branches on Git to build domain-specific search expert skills (e.g., SEO Expert, Affiliate Hunter, Tool Digger), making edge knowledge accessible to more people.
 >
-> **🤝 如何贡献 PR**：
-> - 🌿 **搭建领域特化分支** - 创建针对特定领域的专家版本（如 `seo-expert`、`affiliate-hunter`）
-> - 🔧 **优化原有 skill** - 提高工具的多功能性和鲁棒性（反爬策略、错误处理、性能优化）
-> - 📚 **分享高质量论坛** - 在 `forum_database.json` 中添加你在用的深水论坛和搜索策略
+> **🤝 How to Contribute PRs**:
+> - 🌿 **Build Domain-Specific Branches** - Create specialized versions for specific domains (e.g., `seo-expert`, `affiliate-hunter`)
+> - 🔧 **Optimize Existing Skill** - Improve tool versatility and robustness (anti-scraping strategies, error handling, performance optimization)
+> - 📚 **Share Quality Forums** - Add deep-dive forums you use to `forum_database.json` with search strategies
+> - 🤖 **Add Automation Capabilities** - Integrate scheduled tasks, push to Notion/Feishu/Slack and other collaboration tools
 >
-> 让我们一起打破信息壁垒，促进知识平权！🚀
+> Let's break information barriers and promote knowledge equity together! 🚀
 
-### 什么是边缘知识？
+### What is Edge Knowledge?
 
-在AI时代中，LLM所能理解或者容易在internet收集到的信息属于通用知识，而带有稀缺性的，行业knowhow的，类似灰帽黑帽的reach规则本身的我称之为边缘知识。
+In the AI era, information that LLMs can easily understand or collect from the internet is considered common knowledge. Edge knowledge refers to scarce, industry know-how, and gray/black hat techniques that reach the boundaries of platform rules.
 
-**边缘知识包括**：
-- ✅ 黑白灰帽SEO技巧：PBN、Parasite SEO、Cloaking、Link Farms
-- ✅ 实战骚招：被禁的、有风险的、但有效的玩法
-- ✅ 地下工具：GSA SER、SEnuke、Xrumer、Scrapebox
-- ✅ 实战数据：成功率、价格、风险、案例数字
-- ✅ 争议玩法：高赞回复、争议讨论、实战分享
+**Edge Knowledge Includes**:
+- ✅ Black/White/Gray Hat SEO: PBN, Parasite SEO, Cloaking, Link Farms
+- ✅ Tactical Tricks: Banned, risky, but effective methods
+- ✅ Underground Tools: GSA SER, SEnuke, Xrumer, Scrapebox
+- ✅ Real Data: Success rates, prices, risks, case numbers
+- ✅ Controversial Tactics: High-voted replies, controversial discussions, practical sharing
 
-**不包括**：
-- ❌ 白帽鸡汤（"写好内容就有流量"）
-- ❌ 官方文档（Google SEO 指南）
-- ❌ 主流建议（"做好用户体验"）
+**Does NOT Include**:
+- ❌ White Hat Platitudes ("write good content and traffic will come")
+- ❌ Official Documentation (Google SEO Guidelines)
+- ❌ Mainstream Advice ("improve user experience")
 
-### 边缘知识的三大特征
+### Three Characteristics of Edge Knowledge
 
-1. **时效性 (Freshness)** - 新鲜的信息（2025年后）
-2. **稀缺性 (Scarcity)** - 独家的信息（小圈子知道）
-3. **可信度 (Credibility)** - 可信的信息（有数据、案例）
+1. **Freshness** - Recent information (post-2025)
+2. **Scarcity** - Exclusive information (known in small circles)
+3. **Credibility** - Trustworthy information (with data and cases)
 
-## ✨ 核心能力
+## ✨ Core Capabilities
 
-- 🎯 **意图提取与查询泛化** - 根据用户泛化查询方向及推荐高质量论坛
-- 🧠 **用户偏好记忆** - 记住用户喜欢的论坛和搜索习惯
-- 🔐 **账密管理** - 自动管理论坛账号密码，支持会话复用
-- 🛡️ **防风控系统** - 固定指纹、随机延迟、会话管理，降低账号风险
-- 🌐 **智能浏览器爬取** - 使用 browser-use 技能，支持截图+视觉识别
-- 🔍 **深度内容分析** - 边缘知识识别、骚人识别、资源提取
-- 📊 **单一报告输出** - 按日期+主题命名，结构化展示
+- 🎯 **Intent Extraction & Query Generalization** - Generalizes query directions and recommends high-quality forums
+- 🧠 **User Preference Memory** - Remembers favorite forums and search habits
+- 🔐 **Credential Management** - Automatically manages forum credentials, supports session reuse
+- 🛡️ **Anti-Detection System** - Fixed fingerprints, random delays, session management to reduce account risk
+- 🌐 **Smart Browser Crawling** - Uses browser-use skill, supports screenshots + visual recognition
+- 🔍 **Deep Content Analysis** - Edge knowledge identification, power user identification, resource extraction
+- 📊 **Single Report Output** - Named by date + topic, structured display
 
-## 📦 安装
+## 📦 Installation
 
-将此 skill 复制到 Claude Code 的 skills 目录：
+Copy this skill to Claude Code's skills directory:
 
 ```bash
 cp -r edge-knowledge-hunter ~/.claude/skills/
 ```
 
-## ⚙️ 配置文件说明
+## ⚙️ Configuration Files
 
 ### 1. forum_database.json
 
-论坛知识库，包含论坛信息和搜索策略。
+The forum knowledge base containing forum information and search strategies.
 
-**结构说明**:
+**Structure**:
 ```json
 {
   "categories": {
     "问题型检索": {
-      "description": "适合挖掘评论区深度讨论和真实用户反馈",
+      "description": "Suitable for mining deep discussions and real user feedback in comment sections",
       "forums": [...]
     },
     "边缘知识检索": {
-      "description": "适合挖掘主流渠道找不到的灰色/黑帽技巧",
+      "description": "Suitable for mining gray/black hat techniques not found in mainstream channels",
       "forums": [...]
     },
     "高自由度深度论坛": {
-      "description": "信息焦虑时想看点别人不知道的深度内容",
+      "description": "Deep content that others don't know about",
       "forums": [...]
     }
   },
@@ -81,26 +84,26 @@ cp -r edge-knowledge-hunter ~/.claude/skills/
     "INS刷流量刷粉丝": {
       "keywords": [...],
       "recommended_forums": [...],
-      "focus": "评论区真实反馈和灰色技巧"
+      "focus": "Real feedback in comment sections and gray techniques"
     }
   }
 }
 ```
 
-**使用方式**:
-- 系统会自动读取此文件来推荐论坛
-- 你可以添加新的论坛或搜索策略
-- 每个论坛包含：名称、URL、评分、成本、适合人群、标签
+**Usage**:
+- The system automatically reads this file to recommend forums
+- You can add new forums or search strategies
+- Each forum includes: name, URL, rating, cost, target audience, tags
 
 ### 2. memory.json.template
 
-用户偏好和爬取历史的模板文件。首次使用时复制为 `memory.json`：
+Template for user preferences and crawling history. Copy to `memory.json` for first use:
 
 ```bash
 cp memory.json.template memory.json
 ```
 
-**结构说明**:
+**Structure**:
 ```json
 {
   "userPreferences": {
@@ -133,108 +136,107 @@ cp memory.json.template memory.json
 }
 ```
 
-**字段说明**:
-- `userPreferences`: 你喜欢的论坛和领域
-- `forumCredentials`: 论坛登录凭证（当你提供账号密码时自动保存）
-- `crawledResources`: 已爬取的 URL 历史（防止重复爬取）
-- `antiDetection`: 防风控配置（视口、延迟、登录限制等）
+**Fields Explanation**:
+- `userPreferences`: Your favorite forums and domains
+- `forumCredentials`: Forum login credentials (auto-saved when you provide them)
+- `crawledResources`: History of crawled URLs (prevents duplicate crawling)
+- `antiDetection`: Anti-detection configuration (viewport, delays, login limits)
 
-**隐私说明**: `memory.json` 已在 `.gitignore` 中，不会被提交到 Git。你的账号密码安全地保存在本地。
+**Privacy Note**: `memory.json` is in `.gitignore` and won't be committed to Git. Your credentials are safe locally.
 
-## 🚀 使用方法
+## 🚀 Usage
 
-### 基本用法
+### Basic Usage
 
 ```
-使用 edge-knowledge-hunter 挖掘高性价比的INS刷流量服务
+Use edge-knowledge-hunter to mine cost-effective Instagram growth services
 ```
 
-### 工作流程
+### Workflow
 
-1. **阶段1：推荐论坛** - 系统根据你的需求推荐相关论坛
-2. **阶段2：智能爬取** - 使用 browser-use 深度爬取论坛内容
-3. **阶段3：内容分析** - 识别边缘知识、骚人、资源
-4. **阶段4：生成报告** - 输出结构化 Markdown 报告
+1. **Stage 1: Forum Recommendation** - System recommends relevant forums based on your needs
+2. **Stage 2: Smart Crawling** - Deep crawls forum content using browser-use
+3. **Stage 3: Content Analysis** - Identifies edge knowledge, power users, resources
+4. **Stage 4: Report Generation** - Outputs structured Markdown report
 
-## 📚 部分使用论坛
+## 📚 Supported Forums (Partial List)
 
-| 排名 | 论坛 | 评分 | 成本 | 适合人群 |
-|------|------|------|------|----------|
-| 1 | GreyHatMafia | 9.5/10 | 免费 | 所有人 |
-| 4 | SEO Isn't Dead | 9/10 | 免费 | SEO从业者 |
-| 6 | BlackHatWorld | 8.5/10 | 免费 | 综合营销 |
-| 7 | BestBlackHatForum | 9.5/10 | 免费 | 推荐看slenderman的帖子 |
-| 8 | Reddit | 10/10 | 免费 | 价值藏在评论区里 |
+| Rank | Forum | Rating | Cost | Target Audience |
+|------|-------|--------|------|-----------------|
+| 1 | GreyHatMafia | 9.5/10 | Free | Everyone |
+| 4 | SEO Isn't Dead | 9/10 | Free | SEO Practitioners |
+| 6 | BlackHatWorld | 8.5/10 | Free | General Marketing |
+| 7 | BestBlackHatForum | 9.5/10 | Free | Recommended: slenderman's posts |
+| 8 | Reddit | 10/10 | Free | Value in comment sections |
 
-## 📋 报告示例
+## 📋 Report Example
 
-生成的报告包含三层分析：
+Generated reports contain three-layer analysis:
 
-### 1. 边缘知识识别
+### 1. Edge Knowledge Identification
 ```markdown
-### 边缘知识 #1: [知识标题]
-**压缩表达**: [一句话总结]
-**容易理解的解释**: [详细解释]
-**观点罗列**: @用户名: "观点内容"
-**风险**: [潜在风险]
-**成本**: [时间/金钱/学习成本]
-**来源链接**: [原始链接]
+### Edge Knowledge #1: [Knowledge Title]
+**Compressed Expression**: [One-sentence summary]
+**Easy Explanation**: [Detailed explanation]
+**Viewpoints**: @username: "viewpoint content"
+**Risk**: [Potential risks]
+**Cost**: [Time/money/learning cost]
+**Source Link**: [Original link]
 ```
 
-### 2. 骚人识别
+### 2. Power User Identification
 ```markdown
-### 骚人 #1: @用户名
-**用户名**: 用户名 (论坛名)
-**高能观点**: "观点1", "观点2"
-**链接**: [用户主页链接]
+### Power User #1: @username
+**Username**: username (forum name)
+**High-Energy Viewpoints**: "viewpoint1", "viewpoint2"
+**Link**: [User profile link]
 ```
 
-### 3. 资源提取
+### 3. Resource Extraction
 ```markdown
-### 资源 #1: [工具/服务名称]
-**名称**: 工具名
-**链接**: [工具链接]
-**描述**: [功能描述]
-**价格**: [价格信息]
-**评价**: [用户评价摘要]
+### Resource #1: [Tool/Service Name]
+**Name**: Tool name
+**Link**: [Tool link]
+**Description**: [Feature description]
+**Price**: [Price information]
+**Review**: [User review summary]
 ```
 
-## 🔧 技术架构
+## 🔧 Technical Architecture
 
-### 依赖
+### Dependencies
 - Claude Code CLI
 - browser-use skill
 - Python 3.8+
 
-### 数据流
+### Data Flow
 ```
-用户需求 → 读取 memory.json → 推荐论坛 → 用户确认 →
-检查账密 → 应用防风控配置 → browser-use爬取 →
-Claude分析 → 生成报告 → 更新 memory.json
+User Need → Read memory.json → Recommend Forums → User Confirms →
+Check Credentials → Apply Anti-Detection Config → browser-use Crawl →
+Claude Analysis → Generate Report → Update memory.json
 ```
-### 参考截图
 
-<!-- 这是一张图片，ocr 内容为： -->
+### Reference Screenshots
+
 ![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384664181-3508fcfa-012e-45b9-a3b3-43f343c4ad21.png)
-<!-- 这是一张图片，ocr 内容为： -->
-![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384830572-2db0ae2f-2b82-4077-bff1-8e04658d708a.png)<!-- 这是一张图片，ocr 内容为： -->
+![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384830572-2db0ae2f-2b82-4077-bff1-8e04658d708a.png)
 ![](https://cdn.nlark.com/yuque/0/2026/png/65208130/1770384935540-1488fc21-351a-4515-ad6f-0431e20ba6ec.png)
 
-## ⚠️ 注意事项
+## ⚠️ Important Notes
 
-1. **合法使用** - 仅用于学习研究，遵守论坛规则和当地法律
-2. **账号安全** - 使用独立账号，避免使用主账号
-3. **防风控** - 系统自动应用防风控策略，但仍需谨慎使用
-4. **内容风险** - 边缘知识可能包含风险操作，请自行判断
+1. **Legal Use** - For educational and research purposes only, comply with forum rules and local laws
+2. **Account Security** - Use dedicated accounts, avoid using your main accounts
+3. **Anti-Detection** - System automatically applies anti-detection strategies, but use cautiously
+4. **Content Risk** - Edge knowledge may contain risky operations, use your own judgment
 
-## 📄 许可证
+## 📄 License
 
 MIT License
 
-## 👤 作者
+## 👤 Author
 
 黑咖啡和冰月亮 (@weihacking)
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
