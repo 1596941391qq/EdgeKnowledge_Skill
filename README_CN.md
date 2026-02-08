@@ -1,4 +1,4 @@
-# Edge Knowledge Hunter - 边缘知识猎人
+# Edge Knowledge - 边缘知识 skill
 
 > **中文文档** | **[English Documentation](./README.md)**
 
@@ -152,6 +152,50 @@ cp memory.json.template memory.json
 使用 edge-knowledge-hunter 挖掘高性价比的INS刷流量服务
 ```
 
+### 实战示例
+
+展示 skill 对边缘知识的追踪能力：
+
+#### 示例 1：黑帽 SEO 技巧
+```
+使用 edge-knowledge-hunter 查找 2026 年最新的黑帽 SEO 技巧
+```
+**你将获得**：
+- 最新的 PBN（私有博客网络）策略
+- 仍然有效的寄生 SEO 战术
+- 绕过 Google 检测的 Cloaking 技术
+- Link Farm 方法和自动化工具
+
+#### 示例 2：联盟营销套利
+```
+使用 edge-knowledge-hunter 发现高利润的联盟流量源
+```
+**你将获得**：
+- 高 ROI 的地下流量源
+- 接受灰帽方法的 CPA 网络
+- 顶级 Affiliate 的媒体购买策略
+- 带实际数字的真实案例研究
+
+#### 示例 3：社交媒体增长黑客
+```
+使用 edge-knowledge-hunter 查找绕过检测的 Instagram 自动化工具
+```
+**你将获得**：
+- 2026 年仍然有效的自动化机器人
+- 提供真实互动的 SMM 面板
+- 增长黑客脚本和技术
+- 风险评估和检测规避方法
+
+#### 示例 4：工具发现
+```
+使用 edge-knowledge-hunter 查找破解的 SEO 工具和自动化软件
+```
+**你将获得**：
+- 高级 SEO 工具的可用破解版
+- 用于抓取和发布的自动化脚本
+- 破解的 WordPress 插件和主题
+- 社区评价和安全评级
+
 ### 工作流程
 
 1. **阶段1：推荐论坛** - 系统根据你的需求推荐相关论坛
@@ -236,8 +280,79 @@ MIT License
 
 ## 👤 作者
 
-黑咖啡和冰月亮 (@weihacking)
+黑咖啡和冰月亮 (@weihackings)
 
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=1596941391qq/EdgeKnowledge_Skill&type=Date)](https://star-history.com/#1596941391qq/EdgeKnowledge_Skill&Date)
+
+## 📝 更新日志
+
+### v1.0.0 (2026-02-07)
+- 🎉 首次发布
+- ✨ AI 驱动的论坛推荐系统
+- 🌐 智能浏览器爬取，集成 browser-use
+- 🔍 三层分析：边缘知识、骚人、资源
+- 🔐 凭证管理和会话复用
+- 🛡️ 防风控系统，指纹管理
+- 📊 结构化 Markdown 报告生成
+- 🌍 双语文档（英文和中文）
+- 📚 数据库包含 14+ 个高价值论坛
+
+## ❓ 常见问题
+
+### Q1: 这个工具合法吗？
+**A**: 本工具仅用于教育和研究目的。请始终遵守论坛服务条款和当地法律。使用风险自负。
+
+### Q2: 我的账号会被封吗？
+**A**: 工具包含防检测功能（随机延迟、会话复用、登录限制），但始终存在风险。我们建议：
+- 使用专用账号，而非主账号
+- 遵守 `maxLoginPerDay` 限制（默认：3次）
+- 不要过于激进地爬取
+
+### Q3: 我需要提供论坛凭证吗？
+**A**: 仅对需要登录的论坛（如 BestBlackHatForum）需要。对于公开论坛（如 Reddit），无需凭证。你的凭证存储在本地 `memory.json` 中，永远不会提交到 Git。
+
+### Q4: 如何添加自己的论坛？
+**A**: 编辑 `forum_database.json` 并将你的论坛添加到适当的类别：
+```json
+{
+  "name": "YourForum",
+  "url": "https://yourforum.com",
+  "rating": 9.0,
+  "cost": "Free",
+  "target_audience": "Your Target Audience",
+  "tags": ["tag1", "tag2"]
+}
+```
+
+### Q5: 我可以创建领域特定分支吗？
+**A**: 可以！Fork 仓库并创建像 `seo-expert` 或 `affiliate-hunter` 这样的分支。为你的领域定制 `forum_database.json` 和 `skill.md`。查看我们的[贡献指南](#-知识平权倡议)。
+
+### Q6: 如何集成 Notion/飞书？
+**A**: 这是一个社区贡献机会！你可以：
+1. Fork 仓库
+2. 添加集成代码以将报告推送到你的协作工具
+3. 提交 PR 与你的集成
+
+### Q7: 边缘知识和通用知识有什么区别？
+**A**:
+- **通用知识**：通过 Google/ChatGPT 容易找到的信息（例如："写好内容"）
+- **边缘知识**：来自地下社区的稀缺、有风险或有争议的战术（例如："2026 年绕过 Google 惩罚的 PBN 网络"）
+
+### Q8: 论坛数据库多久更新一次？
+**A**: 社区驱动！提交 PR 以添加新论坛或更新评分。我们定期审查和合并高质量的贡献。
+
+### Q9: 我可以用这个做白帽 SEO 吗？
+**A**: 虽然工具专注于"边缘"知识，但你可以自定义 `forum_database.json` 以包含白帽论坛并相应调整搜索策略。
+
+### Q10: 如何报告错误或请求功能？
+**A**: 在 [GitHub Issues](https://github.com/1596941391qq/EdgeKnowledge_Skill/issues) 上开一个 issue，包含：
+- 错误/功能的清晰描述
+- 重现步骤（对于错误）
+- 预期与实际行为
+- 你的环境（操作系统、Claude Code 版本）

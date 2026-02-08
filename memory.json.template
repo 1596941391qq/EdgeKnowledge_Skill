@@ -1,8 +1,8 @@
 {
   "userPreferences": {
     "favoriteForums": ["BestBlackHatForum"],
-    "domains": ["SEO", "黑帽技术", "流量套利", "自动化工具"],
-    "lastUsedDomain": "黑帽SEO"
+    "domains": ["SEO", "Black Hat Techniques", "Traffic Arbitrage", "Automation Tools"],
+    "lastUsedDomain": "Black Hat SEO"
   },
   "forumCredentials": {
     "bestblackhatforum.com": {
@@ -21,19 +21,18 @@
       "title": "",
       "forum": "",
       "author": "",
-      "timestamp": ,
+      "timestamp": "",
       "hash": ""
     }
-    
   ],
   "antiDetection": {
     "viewport": {
       "width": 1920,
       "height": 1080
     },
-    "userAgent": "",
-    "timezone": ",
-    "locale": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "timezone": "America/New_York",
+    "locale": "en-US",
     "randomDelayRange": [5000, 30000],
     "maxLoginPerDay": 3,
     "reuseSession": true,

@@ -1,186 +1,187 @@
 {
   "categories": {
-    "问题型检索": {
-      "description": "适合挖掘评论区深度讨论和真实用户反馈",
+    "Q&A_Search": {
+      "description": "Suitable for mining deep discussions and real user feedback in comment sections",
       "forums": [
         {
           "name": "Reddit",
           "url": "https://reddit.com",
           "rating": 10,
-          "cost": "免费",
-          "reason": "即使AI经常引用reddit，但它往往更大的价值藏在评论区里",
-          "适合人群": "所有人",
-          "tags": ["问答", "评论区", "真实反馈", "社区讨论"]
+          "cost": "Free",
+          "reason": "Even though AI often quotes Reddit, the real value is hidden in the comment sections",
+          "target_audience": "Everyone",
+          "tags": ["Q&A", "Comments", "Real Feedback", "Community Discussion"]
         }
       ]
     },
-    "边缘知识检索": {
-      "description": "适合挖掘主流渠道找不到的灰色/黑帽技巧",
+    "Edge_Knowledge_Search": {
+      "description": "Suitable for mining gray/black hat techniques not found in mainstream channels",
       "forums": [
         {
           "name": "BestBlackHatForum",
           "url": "https://bestblackhatforum.com",
           "rating": 9.5,
-          "cost": "免费",
-          "reason": "骚东西确实多，推荐看slenderman的帖子",
-          "适合人群": "所有人",
-          "tags": ["黑帽", "灰色技巧", "边缘知识", "高级技术"],
-          "推荐作者": ["slenderman"]
+          "cost": "Free",
+          "reason": "Lots of edge tactics, highly recommend slenderman's posts",
+          "target_audience": "Everyone",
+          "tags": ["Black Hat", "Gray Techniques", "Edge Knowledge", "Advanced Tech"],
+          "recommended_authors": ["slenderman"]
         }
       ]
     },
-    "高自由度深度论坛": {
-      "description": "信息焦虑时想看点别人不知道的深度内容",
+    "Deep_Dive_Forums": {
+      "description": "Deep content that others don't know about when you have information anxiety",
       "forums": [
         {
           "rank": 1,
           "name": "GreyHatMafia",
           "url": "https://greyhatmafia.com",
           "rating": 9.5,
-          "cost": "免费",
-          "适合人群": "所有人",
-          "tags": ["灰帽", "综合营销", "高质量"]
+          "cost": "Free",
+          "target_audience": "Everyone",
+          "tags": ["Gray Hat", "General Marketing", "High Quality"]
         },
         {
           "rank": 2,
           "name": "AffLIFT",
           "url": "https://afflift.com",
           "rating": 9.5,
-          "cost": "$20/月",
-          "适合人群": "Affiliate新手到进阶",
-          "tags": ["联盟营销", "Affiliate", "进阶"]
+          "cost": "$20/month",
+          "target_audience": "Affiliate Beginners to Advanced",
+          "tags": ["Affiliate Marketing", "Affiliate", "Advanced"]
         },
         {
           "rank": 3,
           "name": "StackThatMoney",
           "url": "https://stackthatmoney.com",
           "rating": 9.5,
-          "cost": "$99/月",
-          "适合人群": "专业Affiliate",
-          "tags": ["联盟营销", "Affiliate", "专业级", "高端"]
+          "cost": "$99/month",
+          "target_audience": "Professional Affiliates",
+          "tags": ["Affiliate Marketing", "Affiliate", "Professional", "Premium"]
         },
         {
           "rank": 4,
           "name": "SEO Isn't Dead",
           "url": "https://seoisntdead.com",
           "rating": 9,
-          "cost": "免费",
-          "适合人群": "SEO从业者",
-          "tags": ["SEO", "搜索引擎优化", "技术"]
+          "cost": "Free",
+          "target_audience": "SEO Practitioners",
+          "tags": ["SEO", "Search Engine Optimization", "Technical"]
         },
         {
           "rank": 5,
           "name": "iAmAffiliate",
           "url": "https://iamaffiliate.com",
           "rating": 9,
-          "cost": "$50/月",
-          "适合人群": "高级Affiliate",
-          "tags": ["联盟营销", "Affiliate", "高级"]
+          "cost": "$50/month",
+          "target_audience": "Advanced Affiliates",
+          "tags": ["Affiliate Marketing", "Affiliate", "Advanced"]
         },
         {
           "rank": 6,
           "name": "BlackHatWorld",
           "url": "https://blackhatworld.com",
           "rating": 8.5,
-          "cost": "免费",
-          "适合人群": "综合营销",
-          "tags": ["黑帽", "综合营销", "流量", "SEO"]
+          "cost": "Free",
+          "target_audience": "General Marketing",
+          "tags": ["Black Hat", "General Marketing", "Traffic", "SEO"]
         },
         {
           "rank": 7,
           "name": "BossCourses",
           "url": "https://bosscourses.com",
           "rating": 8.5,
-          "cost": "$35/课程",
-          "适合人群": "课程学习者",
-          "tags": ["课程", "学习", "教程"]
+          "cost": "$35/course",
+          "target_audience": "Course Learners",
+          "tags": ["Courses", "Learning", "Tutorials"]
         },
         {
           "rank": 8,
           "name": "WickedFire",
           "url": "https://wickedfire.com",
           "rating": 8,
-          "cost": "免费",
-          "适合人群": "Affiliate新手",
-          "tags": ["联盟营销", "Affiliate", "新手"]
+          "cost": "Free",
+          "target_audience": "Affiliate Beginners",
+          "tags": ["Affiliate Marketing", "Affiliate", "Beginners"]
         },
         {
           "rank": 9,
           "name": "Affiliate World",
           "url": "https://affiliateworld.com",
           "rating": 8,
-          "cost": "$99/月",
-          "适合人群": "高端Networking",
-          "tags": ["联盟营销", "Affiliate", "人脉", "高端"]
+          "cost": "$99/month",
+          "target_audience": "Premium Networking",
+          "tags": ["Affiliate Marketing", "Affiliate", "Networking", "Premium"]
         },
         {
           "rank": 10,
           "name": "Cracked.to",
           "url": "https://cracked.to",
           "rating": 7.5,
-          "cost": "免费",
-          "适合人群": "工具需求者",
-          "tags": ["工具", "破解", "资源"]
+          "cost": "Free",
+          "target_audience": "Tool Seekers",
+          "tags": ["Tools", "Cracked", "Resources"]
         },
         {
           "rank": 11,
           "name": "OneHack",
           "url": "https://onehack.us",
           "rating": 7.5,
-          "cost": "免费",
-          "适合人群": "技术+营销",
-          "tags": ["技术", "营销", "综合"]
+          "cost": "Free",
+          "target_audience": "Tech + Marketing",
+          "tags": ["Technical", "Marketing", "General"]
         },
         {
           "rank": 12,
           "name": "Digital Point",
           "url": "https://digitalpoint.com",
           "rating": 7,
-          "cost": "免费",
-          "适合人群": "新手入门",
-          "tags": ["新手", "入门", "综合"]
+          "cost": "Free",
+          "target_audience": "Beginners",
+          "tags": ["Beginners", "Entry Level", "General"]
         },
         {
           "rank": 13,
           "name": "Warrior Forum",
           "url": "https://warriorforum.com",
           "rating": 7,
-          "cost": "免费",
-          "适合人群": "产品调研",
-          "tags": ["产品", "调研", "营销"]
+          "cost": "Free",
+          "target_audience": "Product Research",
+          "tags": ["Products", "Research", "Marketing"]
         },
         {
           "rank": 14,
           "name": "Nulled.to",
           "url": "https://nulled.to",
           "rating": 7,
-          "cost": "免费",
-          "适合人群": "工具需求者",
-          "tags": ["工具", "破解", "资源"]
+          "cost": "Free",
+          "target_audience": "Tool Seekers",
+          "tags": ["Tools", "Nulled", "Resources"]
         }
       ]
     }
   },
   "search_strategies": {
-    "INS刷流量刷粉丝": {
-      "keywords": ["ins", "instagram", "刷流量", "刷粉丝", "instagram growth", "instagram followers", "instagram engagement", "SMM panel", "social media marketing"],
+    "Instagram_Growth": {
+      "keywords": ["instagram", "instagram growth", "instagram followers", "instagram engagement", "SMM panel", "social media marketing", "buy followers", "growth service"],
       "recommended_forums": ["GreyHatMafia", "BlackHatWorld", "Reddit", "BestBlackHatForum"],
-      "focus": "评论区真实反馈和灰色技巧"
+      "focus": "Real feedback in comments and gray hat techniques"
     },
-    "SEO技巧": {
-      "keywords": ["SEO", "backlinks", "link building", "search engine optimization"],
+    "SEO_Techniques": {
+      "keywords": ["SEO", "backlinks", "link building", "search engine optimization", "black hat SEO", "PBN", "parasite SEO"],
       "recommended_forums": ["SEO Isn't Dead", "BlackHatWorld", "GreyHatMafia"],
-      "focus": "最新算法和黑帽技巧"
+      "focus": "Latest algorithms and black hat techniques"
     },
-    "联盟营销": {
-      "keywords": ["affiliate marketing", "CPA", "media buying", "traffic sources"],
+    "Affiliate_Marketing": {
+      "keywords": ["affiliate marketing", "CPA", "media buying", "traffic sources", "conversion optimization"],
       "recommended_forums": ["AffLIFT", "StackThatMoney", "iAmAffiliate", "WickedFire"],
-      "focus": "实战案例和流量源"
+      "focus": "Real case studies and traffic sources"
     },
-    "工具资源": {
-      "keywords": ["tools", "software", "automation", "bots"],
+    "Tools_Resources": {
+      "keywords": ["tools", "software", "automation", "bots", "scrapers", "cracked tools"],
       "recommended_forums": ["Cracked.to", "Nulled.to", "OneHack", "BestBlackHatForum"],
-      "focus": "破解工具和自动化脚本"
+      "focus": "Cracked tools and automation scripts"
     }
   }
 }
+

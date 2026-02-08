@@ -152,6 +152,50 @@ cp memory.json.template memory.json
 Use edge-knowledge-hunter to mine cost-effective Instagram growth services
 ```
 
+### Real-World Examples
+
+Demonstrate the skill's edge knowledge tracking capabilities:
+
+#### Example 1: Black Hat SEO Techniques
+```
+Use edge-knowledge-hunter to find the latest black hat SEO techniques for 2026
+```
+**What you'll get**:
+- Latest PBN (Private Blog Network) strategies
+- Parasite SEO tactics that still work
+- Cloaking techniques to bypass Google detection
+- Link farming methods and automation tools
+
+#### Example 2: Affiliate Marketing Arbitrage
+```
+Use edge-knowledge-hunter to discover profitable affiliate traffic sources
+```
+**What you'll get**:
+- Underground traffic sources with high ROI
+- CPA networks that accept gray hat methods
+- Media buying strategies from top affiliates
+- Real case studies with actual numbers
+
+#### Example 3: Social Media Growth Hacks
+```
+Use edge-knowledge-hunter to find Instagram automation tools that bypass detection
+```
+**What you'll get**:
+- Automation bots that work in 2026
+- SMM panels with real engagement
+- Growth hacking scripts and techniques
+- Risk assessment and detection avoidance
+
+#### Example 4: Tool Discovery
+```
+Use edge-knowledge-hunter to find cracked SEO tools and automation software
+```
+**What you'll get**:
+- Working cracks for premium SEO tools
+- Automation scripts for scraping and posting
+- Nulled WordPress plugins and themes
+- Community reviews and safety ratings
+
 ### Workflow
 
 1. **Stage 1: Forum Recommendation** - System recommends relevant forums based on your needs
@@ -235,8 +279,79 @@ MIT License
 
 ## 👤 Author
 
-黑咖啡和冰月亮 (@weihacking)
+黑咖啡和冰月亮 (@weihackings)
 
 ## 🤝 Contributing
 
 Issues and Pull Requests are welcome!
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=1596941391qq/EdgeKnowledge_Skill&type=Date)](https://star-history.com/#1596941391qq/EdgeKnowledge_Skill&Date)
+
+## 📝 Changelog
+
+### v1.0.0 (2026-02-07)
+- 🎉 Initial release
+- ✨ AI-powered forum recommendation system
+- 🌐 Smart browser crawling with browser-use integration
+- 🔍 Three-layer analysis: Edge Knowledge, Power Users, Resources
+- 🔐 Credential management and session reuse
+- 🛡️ Anti-detection system with fingerprint management
+- 📊 Structured Markdown report generation
+- 🌍 Bilingual documentation (English & Chinese)
+- 📚 14+ high-value forums in database
+
+## ❓ FAQ
+
+### Q1: Is this tool legal to use?
+**A**: This tool is for educational and research purposes only. Always comply with forum terms of service and local laws. Use at your own risk.
+
+### Q2: Will my account get banned?
+**A**: The tool includes anti-detection features (random delays, session reuse, login limits), but there's always a risk. We recommend:
+- Use dedicated accounts, not your main accounts
+- Respect the `maxLoginPerDay` limit (default: 3)
+- Don't crawl too aggressively
+
+### Q3: Do I need to provide forum credentials?
+**A**: Only for forums that require login (like BestBlackHatForum). For public forums (like Reddit), no credentials needed. Your credentials are stored locally in `memory.json` and never committed to Git.
+
+### Q4: How do I add my own forums?
+**A**: Edit `forum_database.json` and add your forum to the appropriate category:
+```json
+{
+  "name": "YourForum",
+  "url": "https://yourforum.com",
+  "rating": 9.0,
+  "cost": "Free",
+  "target_audience": "Your Target Audience",
+  "tags": ["tag1", "tag2"]
+}
+```
+
+### Q5: Can I create domain-specific branches?
+**A**: Yes! Fork the repo and create a branch like `seo-expert` or `affiliate-hunter`. Customize `forum_database.json` and `skill.md` for your domain. See our [contribution guidelines](#-knowledge-equity-initiative).
+
+### Q6: How do I integrate with Notion/Feishu?
+**A**: This is a community contribution opportunity! You can:
+1. Fork the repo
+2. Add integration code to push reports to your collaboration tool
+3. Submit a PR with your integration
+
+### Q7: What's the difference between edge knowledge and common knowledge?
+**A**:
+- **Common Knowledge**: Information easily found via Google/ChatGPT (e.g., "write good content")
+- **Edge Knowledge**: Scarce, risky, or controversial tactics from underground communities (e.g., "PBN networks that bypass Google penalties in 2026")
+
+### Q8: How often is the forum database updated?
+**A**: Community-driven! Submit PRs to add new forums or update ratings. We review and merge quality contributions regularly.
+
+### Q9: Can I use this for white hat SEO?
+**A**: While the tool focuses on "edge" knowledge, you can customize `forum_database.json` to include white hat forums and adjust search strategies accordingly.
+
+### Q10: How do I report bugs or request features?
+**A**: Open an issue on [GitHub Issues](https://github.com/1596941391qq/EdgeKnowledge_Skill/issues) with:
+- Clear description of the bug/feature
+- Steps to reproduce (for bugs)
+- Expected vs actual behavior
+- Your environment (OS, Claude Code version)
