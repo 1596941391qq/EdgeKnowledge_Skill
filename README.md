@@ -1,4 +1,4 @@
-# Edge Knowledge Hunter
+# Edge Knowledge
 
 > **[Chinese Documentation](./README_CN.md)** | **English Documentation**
 
@@ -10,7 +10,7 @@ AI-powered edge knowledge mining system. Intelligently recommends high-value for
 > This project encourages community contributions! You can create branches on Git to build domain-specific search expert skills (e.g., SEO Expert, Affiliate Hunter, Tool Digger), making edge knowledge accessible to more people.
 >
 > **🤝 How to Contribute PRs**:
-> - 🌿 **Build Domain-Specific Branches** - Create specialized versions for specific domains (e.g., `seo-expert`, `affiliate-hunter`)
+> - 🌿 **Build Domain-Specific Branches** - Create specialized versions for specific domains (e.g., `seo-expert`, `affiliate`)
 > - 🔧 **Optimize Existing Skill** - Improve tool versatility and robustness (anti-scraping strategies, error handling, performance optimization)
 > - 📚 **Share Quality Forums** - Add deep-dive forums you use to `forum_database.json` with search strategies
 > - 🤖 **Add Automation Capabilities** - Integrate scheduled tasks, push to Notion/Feishu/Slack and other collaboration tools
@@ -54,7 +54,7 @@ In the AI era, information that LLMs can easily understand or collect from the i
 Copy this skill to Claude Code's skills directory:
 
 ```bash
-cp -r edge-knowledge-hunter ~/.claude/skills/
+cp -r edge-knowledge ~/.claude/skills/
 ```
 
 ## ⚙️ Configuration Files
@@ -149,7 +149,7 @@ cp memory.json.template memory.json
 ### Basic Usage
 
 ```
-Use edge-knowledge-hunter to mine cost-effective Instagram growth services
+Use edge-knowledge to mine cost-effective Instagram growth services
 ```
 
 ### Real-World Examples
@@ -158,7 +158,7 @@ Demonstrate the skill's edge knowledge tracking capabilities:
 
 #### Example 1: Black Hat SEO Techniques
 ```
-Use edge-knowledge-hunter to find the latest black hat SEO techniques for 2026
+Use edge-knowledge to find the latest black hat SEO techniques for 2026
 ```
 **What you'll get**:
 - Latest PBN (Private Blog Network) strategies
@@ -168,7 +168,7 @@ Use edge-knowledge-hunter to find the latest black hat SEO techniques for 2026
 
 #### Example 2: Affiliate Marketing Arbitrage
 ```
-Use edge-knowledge-hunter to discover profitable affiliate traffic sources
+Use edge-knowledge to discover profitable affiliate traffic sources
 ```
 **What you'll get**:
 - Underground traffic sources with high ROI
@@ -178,7 +178,7 @@ Use edge-knowledge-hunter to discover profitable affiliate traffic sources
 
 #### Example 3: Social Media Growth Hacks
 ```
-Use edge-knowledge-hunter to find Instagram automation tools that bypass detection
+Use edge-knowledge to find Instagram automation tools that bypass detection
 ```
 **What you'll get**:
 - Automation bots that work in 2026
@@ -188,7 +188,7 @@ Use edge-knowledge-hunter to find Instagram automation tools that bypass detecti
 
 #### Example 4: Tool Discovery
 ```
-Use edge-knowledge-hunter to find cracked SEO tools and automation software
+Use edge-knowledge to find cracked SEO tools and automation software
 ```
 **What you'll get**:
 - Working cracks for premium SEO tools
@@ -319,7 +319,7 @@ Issues and Pull Requests are welcome!
 ```
 
 ### Q5: Can I create domain-specific branches?
-**A**: Yes! Fork the repo and create a branch like `seo-expert` or `affiliate-hunter`. Customize `forum_database.json` and `skill.md` for your domain. See our [contribution guidelines](#-knowledge-equity-initiative).
+**A**: Yes! Fork the repo and create a branch like `seo-expert` or `affiliate`. Customize `forum_database.json` and `skill.md` for your domain. See our [contribution guidelines](#-knowledge-equity-initiative).
 
 ### Q6: How do I integrate with Notion/Feishu?
 **A**: This is a community contribution opportunity! You can:

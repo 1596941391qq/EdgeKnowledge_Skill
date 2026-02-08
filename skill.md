@@ -8,7 +8,7 @@ author: 黑咖啡和冰月亮 (@weihackings)
 tags: [forum-crawler, edge-knowledge, blackhat, affiliate, browser-automation, visual-analysis]
 categories: [research, marketing-intelligence, gray-area]
 ---
-# Edge Knowledge Hunter - 边缘知识猎人
+# Edge Knowledge - 边缘知识
 
 ## 🎯 核心理念
 
@@ -117,11 +117,11 @@ Agent: ⚠️ 今日登录次数已达上限（3次）
 
 ### 5. Claude 工具使用指令（必须执行）
 
-**每次使用 edge-knowledge-hunter skill 时，必须按以下顺序执行：**
+**每次使用 edge-knowledge skill 时，必须按以下顺序执行：**
 
 #### 步骤 1：读取 memory.json（必须第一步执行）
 ```
-使用 Read 工具读取：/c/Users/24342/.claude/skills/edge-knowledge-hunter/memory.json
+使用 Read 工具读取：/c/Users/24342/.claude/skills/edge-knowledge/memory.json
 ```
 
 **检查内容**：
@@ -238,7 +238,7 @@ Agent: ⚠️ 今日登录次数已达上限（3次）
 
 系统**动态从用户查询中提取核心意图**，然后泛化扩展成多个搜索点/导航方向，确保覆盖主流 → 边缘 → 免费/高性价比 → 风险/黑灰产的全谱系。——必须先执行此阶段！ 如果用户查询太泛（如“2026 赚钱”“副业推荐”），先询问：“你想挖掘哪类边缘知识？如刷粉服务、信息差套利、黑帽 affiliate、SMM panel 等？请具体一点。”
 
-**重要：无论用户如何表述“使用 edge-knowledge-hunter 挖掘XX”，你都必须先完成阶段1的全流程（意图提取 → 泛化扩展 → 推荐论坛列表 → 输出给用户确认），不得直接跳到爬取或报告生成。** **在输出推荐论坛列表后，必须停下来询问用户：“这些方向对吗？想重点爬哪些论坛/关键词？（可指定额外）”** **只有用户回复确认或指定调整后，才进入阶段2。**
+**重要：无论用户如何表述“使用 edge-knowledge 挖掘XX”，你都必须先完成阶段1的全流程（意图提取 → 泛化扩展 → 推荐论坛列表 → 输出给用户确认），不得直接跳到爬取或报告生成。** **在输出推荐论坛列表后，必须停下来询问用户：“这些方向对吗？想重点爬哪些论坛/关键词？（可指定额外）”** **只有用户回复确认或指定调整后，才进入阶段2。**
 
 #### 核心流程（Agent 必须执行）
 1. **意图提取**（15–30 秒思考）：
@@ -520,7 +520,7 @@ Agent: ⚠️ 今日登录次数已达上限（3次）
 
 ### 用户请求
 ```
-使用 edge-knowledge-hunter 挖掘高性价比高好评的INS刷流量刷粉丝服务
+使用 edge-knowledge 挖掘高性价比高好评的INS刷流量刷粉丝服务
 ```
 
 ### 你的响应流程
