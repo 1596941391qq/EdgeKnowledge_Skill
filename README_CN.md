@@ -41,6 +41,7 @@ AI驱动的边缘知识挖掘系统。针对用户需求，从高价值论坛（
 
 ## ✨ 核心能力
 
+### V1: 基础能力
 - 🎯 **意图提取与查询泛化** - 根据用户泛化查询方向及推荐高质量论坛
 - 🧠 **用户偏好记忆** - 记住用户喜欢的论坛和搜索习惯
 - 🔐 **账密管理** - 自动管理论坛账号密码，支持会话复用
@@ -48,6 +49,18 @@ AI驱动的边缘知识挖掘系统。针对用户需求，从高价值论坛（
 - 🌐 **智能浏览器爬取** - 使用 browser-use 技能，支持截图+视觉识别
 - 🔍 **深度内容分析** - 边缘知识识别、骚人识别、资源提取
 - 📊 **单一报告输出** - 按日期+主题命名，结构化展示
+
+### 🆕 V2: 猎人模式 (NEW!)
+
+V2 新增激进的资源获取能力：
+
+| 能力 | 说明 |
+|------|------|
+| **🎯 价值信号识别** | 6 种模式：回复解锁、隐藏内容、下载链接、提取码、附件、任务门槛 |
+| **🤖 自动回复系统** | 25 条随机模板 (15 英文 + 10 中文)，自动语言检测 |
+| **📦 资源下载器** | 下载所有文件类型 (.exe/.bat/.torrent)，保持完整性 |
+| **🔗 深水区钻取** | 外链跟踪、作者追踪、评论区挖掘 |
+| **🧵 工具集成** | Agent-Reach、gallery-dl、yt-dlp、Crawl4AI 就绪 |
 
 ## 📦 安装
 
@@ -143,6 +156,52 @@ cp memory.json.template memory.json
 - `antiDetection`: 防风控配置（视口、延迟、登录限制等）
 
 **隐私说明**: `memory.json` 已在 `.gitignore` 中，不会被提交到 Git。你的账号密码安全地保存在本地。
+
+### 3. value_patterns.json (V2)
+
+猎人模式的价值信号识别模式库。
+
+**识别模式**：
+- `reply_unlock` - "回复可见隐藏内容"
+- `hidden_content` - 隐藏内容 / 折叠区块
+- `download_link` - Mega/百度盘/Google Drive 链接
+- `extract_code` - "密码: xxx" / "提取码: xxx"
+- `attachment` - "下载附件"
+- `task_threshold` - "需要 X 帖子 / X 点赞才能查看"
+
+### 4. platforms.json (V2)
+
+平台专用下载配置。
+
+**结构**：
+```json
+{
+  "mega.nz": {
+    "tool": "gallery-dl",
+    "args": ["--no-mtime"],
+    "maxConcurrent": 2
+  },
+  "youtube.com": {
+    "tool": "yt-dlp",
+    "args": ["-f", "best"]
+  }
+}
+```
+
+### 5. resources/ 目录 (V2)
+
+资源存储目录结构：
+```
+resources/
+├── downloads/      # 下载文件（按日期）
+├── links/
+│   ├── mega.json   # Mega 链接索引
+│   ├── baidu.json  # 百度盘链接
+│   └── gdrive.json # Google Drive 链接
+├── codes/
+│   └── passwords.json  # 提取码
+└── index.json      # 统一资源索引
+```
 
 ## 🚀 使用方法
 
@@ -252,6 +311,11 @@ cp memory.json.template memory.json
 - Claude Code CLI
 - browser-use skill
 - Python 3.8+
+
+### V2 额外依赖
+```bash
+pip install gallery-dl yt-dlp crawl4ai
+```
 
 ### 数据流
 ```

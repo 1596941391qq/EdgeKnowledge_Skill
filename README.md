@@ -41,6 +41,7 @@ In the AI era, information that LLMs can easily understand or collect from the i
 
 ## ✨ Core Capabilities
 
+### V1: Foundation
 - 🎯 **Intent Extraction & Query Generalization** - Generalizes query directions and recommends high-quality forums
 - 🧠 **User Preference Memory** - Remembers favorite forums and search habits
 - 🔐 **Credential Management** - Automatically manages forum credentials, supports session reuse
@@ -48,6 +49,18 @@ In the AI era, information that LLMs can easily understand or collect from the i
 - 🌐 **Smart Browser Crawling** - Uses browser-use skill, supports screenshots + visual recognition
 - 🔍 **Deep Content Analysis** - Edge knowledge identification, power user identification, resource extraction
 - 📊 **Single Report Output** - Named by date + topic, structured display
+
+### 🆕 V2: Hunter Mode (NEW!)
+
+V2 adds aggressive resource acquisition capabilities:
+
+| Feature | Description |
+|---------|-------------|
+| **🎯 Value Signal Detection** | 6 pattern types: Reply-unlock, Hidden content, Download links, Extract codes, Attachments, Task thresholds |
+| **🤖 Auto-Reply System** | 25 random templates (15 EN + 10 CN), auto language detection |
+| **📦 Resource Downloader** | Downloads ALL file types (.exe/.bat/.torrent), maintains completeness |
+| **🔗 Deep Dive Tracking** | External link follow, Author tracking, Comment section mining |
+| **🧵 Tool Integration** | Agent-Reach, gallery-dl, yt-dlp, Crawl4AI ready |
 
 ## 📦 Installation
 
@@ -143,6 +156,52 @@ cp memory.json.template memory.json
 - `antiDetection`: Anti-detection configuration (viewport, delays, login limits)
 
 **Privacy Note**: `memory.json` is in `.gitignore` and won't be committed to Git. Your credentials are safe locally.
+
+### 3. value_patterns.json (V2)
+
+Value signal detection patterns for Hunter Mode.
+
+**Patterns Include**:
+- `reply_unlock` - "Reply to unlock hidden content"
+- `hidden_content` - "Hidden content / Spoiler blocks"
+- `download_link` - Mega/Mediafire/Baidu pan links
+- `extract_code` - "Password: xxx" / "Code: xxx"
+- `attachment` - "Download attachment"
+- `task_threshold` - "Need X posts / X likes to view"
+
+### 4. platforms.json (V2)
+
+Platform-specific download configurations.
+
+**Structure**:
+```json
+{
+  "mega.nz": {
+    "tool": "gallery-dl",
+    "args": ["--no-mtime"],
+    "maxConcurrent": 2
+  },
+  "youtube.com": {
+    "tool": "yt-dlp",
+    "args": ["-f", "best"]
+  }
+}
+```
+
+### 5. resources/ Directory (V2)
+
+Organized resource storage:
+```
+resources/
+├── downloads/      # Downloaded files (by date)
+├── links/
+│   ├── mega.json   # Mega links index
+│   ├── baidu.json  # Baidu pan links
+│   └── gdrive.json # Google Drive links
+├── codes/
+│   └── passwords.json  # Extract codes
+└── index.json      # Unified resource index
+```
 
 ## 🚀 Usage
 
@@ -252,6 +311,11 @@ Generated reports contain three-layer analysis:
 - Claude Code CLI
 - browser-use skill
 - Python 3.8+
+
+### V2 Additional Dependencies
+```bash
+pip install gallery-dl yt-dlp crawl4ai
+```
 
 ### Data Flow
 ```
