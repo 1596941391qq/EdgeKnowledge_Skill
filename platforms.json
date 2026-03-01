@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "description": "平台下载配置",
+
+  "platforms": {
+    "mega": {
+      "name": "Mega",
+      "domains": ["mega.nz", "mega.co.nz"],
+      "tool": "gallery-dl",
+      "requiresAuth": false
+    },
+    "baidu": {
+      "name": "百度网盘",
+      "domains": ["pan.baidu.com"],
+      "tool": "manual",
+      "requiresAuth": true
+    },
+    "gdrive": {
+      "name": "Google Drive",
+      "domains": ["drive.google.com"],
+      "tool": "gdown",
+      "requiresAuth": false
+    },
+    "mediafire": {
+      "name": "MediaFire",
+      "domains": ["mediafire.com"],
+      "tool": "gallery-dl",
+      "requiresAuth": false
+    },
+    "dropbox": {
+      "name": "Dropbox",
+      "domains": ["dropbox.com"],
+      "tool": "gallery-dl",
+      "requiresAuth": false
+    }
+  },
+
+  "tools": {
+    "gallery-dl": {
+      "command": "gallery-dl",
+      "args": ["--download-directory", "{output_dir}", "{url}"]
+    },
+    "yt-dlp": {
+      "command": "yt-dlp",
+      "args": ["-o", "{output_dir}/%(title)s.%(ext)s", "{url}"]
+    },
+    "gdown": {
+      "command": "gdown",
+      "args": ["-O", "{output_dir}/{filename}", "{url}"]
+    }
+  }
+}

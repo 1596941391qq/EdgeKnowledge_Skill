@@ -616,3 +616,358 @@ Claude分析 → 生成报告 → 更新 memory.json
 
 5. **Windows 兼容性问题**
    - 使用 WSL（Windows Subsystem for Linux）
+
+---
+
+## V2 猎人模式
+
+### 核心升级
+
+从"被动观察者"升级为"主动猎人"——自己判断价值在哪里，自己想办法钻到深水区探寻资源。
+
+| V1 能力 | V2 升级 |
+|---------|---------|
+| 爬帖子和评论 | 识别"回复可见"并自动回复解锁 |
+| 提取资源链接 | 下载资源到用户指定目录 |
+| 分析边缘知识 | 钻到深水区找隐藏资源 |
+| 用户驱动流程 | 自己判断价值在哪里 |
+
+---
+
+### 新增能力
+
+#### 1. 价值信号识别系统
+
+**信号类型与猎手动作映射**：
+
+| 信号类型 | 模式示例 | 猎手动作 |
+|---------|---------|---------|
+| **回复解锁** | "回复可见"、"Reply to unlock"、"回复下载" | 自动回复随机内容 |
+| **隐藏内容** | "登录后查看"、"HIDDEN CONTENT"、"VIP可见" | 登录后重新爬取 |
+| **下载资源** | Mega/MediaFire/GDrive/百度云直链 | 下载到 `resources/downloads/` |
+| **附件文件** | .zip/.pdf/.py/.exe/.rar 附件 | 下载并记录元数据 |
+| **提取码** | "密码：xxx"、"解压密码"、"pass: xxx" | 关联到对应下载文件 |
+| **任务门槛** | "关注公众号"、"分享解锁"、"点赞可见" | 记录需求，部分可自动化 |
+| **外链跟踪** | 帖子里的短链接/外链 | 访问并判断是否是资源页 |
+
+**价值信号正则库**（存储于 `value_patterns.json`）：
+
+```json
+{
+  "replyToUnlock": [
+    "回复.{0,10}可见",
+    "回复.{0,10}下载",
+    "reply.{0,10}unlock",
+    "reply.{0,10}download",
+    "reply.{0,10}see"
+  ],
+  "hiddenContent": [
+    "登录后查看",
+    "登录可见",
+    "VIP.{0,10}可见",
+    "hidden content",
+    "login to view"
+  ],
+  "downloadLink": [
+    "mega\\.nz/[^\"]+",
+    "mediafire\\.com/[^\"]+",
+    "drive\\.google\\.com/[^\"]+",
+    "pan\\.baidu\\.com/[^\"]+",
+    "megaup\\.net/[^\"]+",
+    "rapidgator\\.net/[^\"]+"
+  ],
+  "extractCode": [
+    "密码[：:][\\s]*([a-zA-Z0-9]{4})",
+    "提取码[：:][\\s]*([a-zA-Z0-9]{4})",
+    "pass[：:][\\s]*([a-zA-Z0-9]+)",
+    "password[：:][\\s]*([a-zA-Z0-9]+)"
+  ],
+  "attachment": [
+    "\\.zip", "\\.rar", "\\.7z", "\\.pdf",
+    "\\.py", "\\.exe", "\\.bat", "\\.sh"
+  ]
+}
+```
+
+---
+
+#### 2. 资源获取流程
+
+**Phase 0：初始化**
+
+```
+1. 读取 memory.json
+2. 检查 resourceConfig.resourceRoot 是否有效
+3. 如果目录不存在，创建完整目录结构
+4. 加载价值信号模式库
+```
+
+**Phase 1：价值扫描**
+
+```
+进入页面
+    ↓
+3秒快速扫描（检测价值信号）
+    ↓
+发现价值信号？
+    ├─ 否 → 标记为低价值，继续下一个
+    └─ 是 → 评估价值密度
+              ↓
+         高价值？
+              ├─ 否 → 标记，继续浏览
+              └─ 是 → 需要什么动作？
+                       ├─ 登录 → 用 memory 中账密
+                       ├─ 回复 → 自动回复随机内容
+                       ├─ 下载 → 下载到 resourceRoot
+                       └─ 记录 → 更新 index.json
+```
+
+**Phase 2：资源整理**
+
+```
+1. 下载完成的文件 → resources/downloads/YYYY-MM-DD/
+2. 网盘链接 → resources/links/{platform}.json
+3. 提取码 → resources/codes/passwords.json
+4. 更新 index.json 统一索引
+```
+
+**自动回复解锁**：
+
+当检测到"回复可见"时，自动从回复模板库（`reply_templates.json`）随机选择一条内容回复，等待 3-8 秒后刷新页面获取隐藏内容。
+
+---
+
+#### 3. 深水区钻取策略
+
+**外链跟踪**
+
+```
+帖子 → 提取所有外链 → 访问每个外链 → 判断是否是资源页 → 如果是，执行下载
+```
+
+判断逻辑：
+1. URL 包含下载关键词（download、file、attach）
+2. 页面包含下载按钮/链接
+3. 页面包含文件大小信息
+
+**作者追踪**
+
+```
+发现高价值作者（如 slenderman） → 获取作者主页 → 爬取所有帖子 → 去重 → 下载资源
+```
+
+高价值作者特征：
+- 帖子被大量收藏
+- 评论多为正面反馈
+- 经常分享下载资源
+- 被其他用户频繁引用
+
+**评论区挖掘**
+
+```
+主帖 → 滚动加载所有评论 → 检测评论中的下载链接/提取码 → 下载
+```
+
+评论区价值特征：
+- 楼中楼包含 "密码：xxx"
+- 评论包含网盘链接
+- 评论包含 "亲测可用"
+- 评论包含资源更新信息
+
+---
+
+#### 4. 缝合项目
+
+**核心依赖（已验证可用）**：
+
+| 项目 | 用途 | 缝合方式 |
+|------|------|---------|
+| **Browser-Use** | 浏览器自动化 | 已集成，增强价值识别模块 |
+| **Crawl4AI** | LLM 驱动的内容提取 | 替换/增强爬取逻辑 |
+| **gallery-dl** | 1400+ 站点资源下载 | 直接调用下载图片/压缩包 |
+| **yt-dlp** | 1000+ 站点视频下载 | 下载视频资源 |
+| **Agent-Reach** | 多平台开箱即用抓取 | Twitter/Reddit/YouTube/小红书/B站 |
+
+**可选增强**：
+
+| 项目 | 用途 |
+|------|------|
+| **Trafilatura** | 正文提取+去噪 |
+| **Firecrawl** | 整站爬取 → Markdown |
+| **SeeMore** | 检测 HTML 隐藏元素 |
+| **LARA** | 页面相关性评分 |
+
+---
+
+#### 5. 资源存储结构
+
+```
+{resourceRoot}/                    # 用户配置的根目录，如 E:\edge_knowledge
+├── downloads/                     # 下载的文件
+│   └── 2026-03-01/               # 按日期分目录
+│       ├── gsa-ser-config.zip
+│       ├── instagram-bot-v3.py
+│       └── seo-tools-pack.7z
+├── links/                         # 网盘链接（不能直下的）
+│   ├── mega.json
+│   ├── baidu.json
+│   └── gdrive.json
+├── codes/                         # 提取码/密码
+│   └── passwords.json
+├── screenshots/                   # 页面截图（可选）
+│   └── 2026-03-01/
+└── index.json                     # 统一索引
+```
+
+**index.json 结构**：
+
+```json
+{
+  "version": "2.0.0",
+  "lastUpdated": "2026-03-01T00:00:00Z",
+  "resourceRoot": "E:\\edge_knowledge",
+  "statistics": {
+    "totalDownloads": 0,
+    "totalLinks": 0,
+    "totalCodes": 0
+  },
+  "downloads": [
+    {
+      "filename": "gsa-ser-config.zip",
+      "source": "https://bestblackhatforum.com/threads/xxx",
+      "sourceTitle": "GSA SER Settings That Work",
+      "author": "slenderman",
+      "downloadDate": "2026-03-01T00:00:00Z",
+      "fileSize": 1234567,
+      "fileType": "zip",
+      "password": "abc123",
+      "tags": ["SEO", "GSA", "backlinks"]
+    }
+  ],
+  "links": [
+    {
+      "url": "https://mega.nz/xxx",
+      "source": "https://bestblackhatforum.com/threads/xxx",
+      "sourceTitle": "Instagram Bot Pack",
+      "author": "slenderman",
+      "addedDate": "2026-03-01T00:00:00Z",
+      "platform": "mega",
+      "password": "pass123",
+      "status": "pending",
+      "tags": ["Instagram", "bot", "automation"]
+    }
+  ],
+  "codes": [
+    {
+      "code": "abc123",
+      "type": "extract",
+      "associatedLink": "https://pan.baidu.com/xxx",
+      "source": "https://bestblackhatforum.com/threads/xxx#post123",
+      "author": "slenderman",
+      "addedDate": "2026-03-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+---
+
+#### 6. memory.json 新增配置
+
+V2 在 memory.json 中新增以下配置节：
+
+```json
+{
+  "version": "2.0.0",
+
+  "resourceConfig": {
+    "resourceRoot": "E:\\edge_knowledge",
+    "downloadSubdirs": true,
+    "downloadAllTypes": true,
+    "maxConcurrentDownloads": 3,
+    "retryAttempts": 3,
+    "timeout": 30000
+  },
+
+  "resourceIndex": {
+    "downloads": [],
+    "links": [],
+    "codes": []
+  },
+
+  "extractionQueue": [
+    {
+      "url": "https://bestblackhatforum.com/threads/xxx",
+      "type": "reply_unlock",
+      "status": "pending",
+      "addedDate": "2026-03-01T00:00:00Z"
+    }
+  ],
+
+  "replyConfig": {
+    "useRandom": true,
+    "language": "auto",
+    "templates": {
+      "english": [
+        "Thanks for sharing this!",
+        "Great post, really helpful.",
+        "Appreciate the detailed explanation.",
+        "This is exactly what I was looking for.",
+        "Awesome resource, thank you!",
+        "Been searching for this for a while.",
+        "Solid contribution to the community.",
+        "Very useful, bookmarked!",
+        "Nice share, going to test this out.",
+        "Thanks for taking the time to post this.",
+        "Legend! This is gold.",
+        "Appreciate the share brother.",
+        "This saved me hours of work.",
+        "Quality content as always.",
+        "Gonna give this a try, thanks!"
+      ],
+      "chinese": [
+        "感谢分享！",
+        "太有用了，收藏了",
+        "正好需要这个，谢谢",
+        "大佬牛逼！",
+        "这个资源太棒了",
+        "找了很久终于找到了",
+        "非常详细的教程",
+        "马克一下，回头试试",
+        "好东西，感谢楼主",
+        "学到了，感谢！"
+      ]
+    }
+  }
+}
+```
+
+**配置说明**：
+
+| 配置节 | 用途 |
+|--------|------|
+| `resourceConfig` | 资源存储配置：根目录、并发数、超时等 |
+| `resourceIndex` | 资源索引：已下载文件、链接、提取码的记录 |
+| `extractionQueue` | 待处理队列：需要登录/回复才能解锁的资源 |
+| `replyConfig` | 自动回复配置：语言、模板库 |
+
+---
+
+### V2 工作流程总览
+
+```
+Phase 0: 初始化
+    ↓
+Phase 1: 价值扫描（检测信号 → 评估密度 → 执行动作）
+    ↓
+Phase 2: 深水区钻取（外链跟踪 → 作者追踪 → 评论区挖掘）
+    ↓
+Phase 3: 资源整理（下载 → 分类 → 索引）
+    ↓
+Phase 4: 生成报告（V1 报告 + 资源清单）
+```
+
+---
+
+**文档版本**: 2.0.0
+**更新日期**: 2026-03-01

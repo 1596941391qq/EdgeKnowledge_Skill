@@ -1,0 +1,117 @@
+{
+  "version": "2.0.0",
+  "description": "价值信号识别模式库",
+
+  "patterns": {
+    "replyToUnlock": {
+      "description": "回复解锁类信号",
+      "priority": "high",
+      "action": "auto_reply",
+      "regex": [
+        "回复.{0,10}可见",
+        "回复.{0,10}下载",
+        "回复.{0,10}查看",
+        "reply.{0,10}unlock",
+        "reply.{0,10}download",
+        "reply.{0,10}see",
+        "reply.{0,10}view",
+        "comment.{0,10}see",
+        "留言.{0,10}查看"
+      ]
+    },
+
+    "hiddenContent": {
+      "description": "隐藏内容类信号",
+      "priority": "high",
+      "action": "login_required",
+      "regex": [
+        "登录后查看",
+        "登录可见",
+        "登录后下载",
+        "VIP.{0,10}可见",
+        "VIP.{0,10}下载",
+        "hidden content",
+        "login to view",
+        "login required",
+        "members only"
+      ]
+    },
+
+    "downloadLink": {
+      "description": "下载链��类信号",
+      "priority": "critical",
+      "action": "download",
+      "regex": [
+        "mega\\.nz/[^\"]+",
+        "mediafire\\.com/[^\"]+",
+        "drive\\.google\\.com/[^\"]+",
+        "pan\\.baidu\\.com/[^\"]+",
+        "megaup\\.net/[^\"]+",
+        "rapidgator\\.net/[^\"]+",
+        "dropbox\\.com/[^\"]+",
+        "1fichier\\.com/[^\"]+",
+        "zippyshare\\.com/[^\"]+",
+        "uploadgig\\.com/[^\"]+",
+        "nitroflare\\.com/[^\"]+",
+        "turbo\\.to/[^\"]+"
+      ]
+    },
+
+    "extractCode": {
+      "description": "提取码类信号",
+      "priority": "critical",
+      "action": "save_code",
+      "regex": [
+        "密码[：:][\\s]*([a-zA-Z0-9]{4,8})",
+        "提取码[：:][\\s]*([a-zA-Z0-9]{4})",
+        "pass[：:][\\s]*([a-zA-Z0-9]+)",
+        "password[：:][\\s]*([a-zA-Z0-9]+)",
+        "pwd[：:][\\s]*([a-zA-Z0-9]+)",
+        "解压密码[：:][\\s]*([a-zA-Z0-9]+)",
+        "密码是[：:][\\s]*([a-zA-Z0-9]+)"
+      ]
+    },
+
+    "attachment": {
+      "description": "附件文件类信号",
+      "priority": "high",
+      "action": "download_attachment",
+      "extensions": [
+        ".zip", ".rar", ".7z", ".tar", ".gz",
+        ".pdf", ".doc", ".docx", ".xls", ".xlsx",
+        ".py", ".js", ".ts", ".sh", ".bat",
+        ".exe", ".msi", ".dmg", ".apk",
+        ".torrent", ".magnet"
+      ]
+    },
+
+    "taskGate": {
+      "description": "任务门槛类信号",
+      "priority": "medium",
+      "action": "log_requirement",
+      "regex": [
+        "关注公众号",
+        "分享到",
+        "点赞.{0,10}可见",
+        "转发.{0,10}解锁",
+        "关注.{0,10}下载",
+        "share.{0,10}unlock",
+        "like.{0,10}download"
+      ]
+    }
+  },
+
+  "valueDensity": {
+    "description": "价值密度评估因子",
+    "factors": {
+      "hasDownloadLink": 30,
+      "hasCode": 20,
+      "hasAttachment": 25,
+      "replyCount": 1,
+      "likeCount": 0.5,
+      "authorReputation": 15,
+      "freshness": 10
+    },
+    "threshold": 50
+  }
+}
