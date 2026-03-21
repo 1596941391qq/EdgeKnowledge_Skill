@@ -40,7 +40,77 @@ categories: [research, marketing-intelligence, gray-area]
 3. **可信度 (Credibility)** - 可信的信息（有数据、案例）
 
 ## 核心能力
-- 🎯 **意图提取与查询泛化** - 根据用户泛化查询方向及推荐高质量论坛
+- 🎯 **意图提取与查询泛化**
+## 🌐 三层浏览器/搜索工具智能路由
+
+本 Skill 内置**智能路由引擎**，根据任务类型自动选择最优工具，遵循**成本优先 + 成功率保障**原则。
+
+### 工具层与选优策略
+
+| 层级 | 工具 | 优先级 | 适用场景 | 成本 | 何时降级 |
+|------|------|--------|----------|------|----------|
+| **Tier 1** | `browser-use` | 默认首选 | 截图+视觉识别、点击/滚动/表单交互、JS懒加载、登录后访问 | 免费（本地 Playwright） | — |
+| **Tier 2** | `agent-browser` | 降级备选 | 重复性结构化提取、引用式元素选择（@e1/@e2）、脚本化多步操作 | 免费（Vercel CLI） | browser-use失败时 |
+| **Tier 3** | `google-gemini-mcp` | 兜底方案 | browser-use被反爬阻断时、批量URL深度分析（>10页）、多模态复杂理解 | API Key（按token计费） | 前两层全失败时 |
+
+### 路由决策树（Claude 执行时自动判断）
+
+```
+收到爬取任务
+    │
+    ├─ 需要截图+视觉识别页面结构？  → browser-use（Tier 1）
+    │     │
+    │     └─ 被 Cloudflare/reCAPTCHA 阻断？
+    │            ├─ reCAPTCHA v2 → ai-captcha-bypass → 重试
+    │            ├─ Cloudflare JS Challenge → 等待5秒重试
+    │            └─ Cloudflare Turnstile / hCaptcha → 降级到 Gemini MCP
+    │
+    ├─ browser-use 失败 / 被阻断？  → google-gemini-mcp（Tier 3）
+    │
+    ├─ 批量 URL 分析（>10页）？     → google-gemini-mcp（Tier 3）
+    │
+    └─ 纯下载任务（不需交互）？      → gallery-dl / yt-dlp（不经浏览器）
+```
+
+### Gemini MCP 配置
+
+安装方式（install.sh 已自动完成）：
+```bash
+npm install -g @modelcontextprotocol/server-gemini
+export GEMINI_API_KEY="your-key-here"
+```
+
+使用条件：
+- `browser-use` / `agent-browser` 被反爬阻断（403/Cloudflare/验证码墙）
+- 需要批量分析超过 10 个 URL 的内容
+- 页面含复杂图表/多模态内容需要 AI 理解
+- 论坛强制 Cloudflare 保护且 cookies 失效
+
+### 自动路由规则（Claude 必须遵守）
+
+```
+IF captcha_detected AND captcha_type == "recaptcha_v2":
+    → ai-captcha-bypass（GPT-4o 或 Gemini 2.5）
+    → 成功后自动重试原操作
+
+IF cloudflare_blocked AND browser_use_failed:
+    → 降级到 google-gemini_mcp
+    → 使用 Gemini 深度搜索模式
+
+IF batch_analysis AND urls > 10:
+    → google-gemini_mcp（并发分析）
+    → browser-use 聚焦前3个高价值 URL
+
+IF visual_heavy AND needs_screenshot:
+    → browser-use（Tier 1，视觉能力最强）
+
+IF download_only:
+    → gallery-dl / yt-dlp（不经浏览器，更快更稳）
+```
+
+---
+
+ - 根据用户泛化查询方向及推荐高质量论坛
 - 🧠 **用户偏好记忆** - 记住用户喜欢的论坛和搜索习惯
 - 🔐 **账密管理** - 自动管理论坛账号密码，支持会话复用
 - 🛡️ **防风控系统** - 固定指纹、随机延迟、会话管理，降低账号风险
@@ -800,6 +870,47 @@ Claude分析 → 生成报告 → 更新 memory.json
 | **Trafilatura** | 正文提取+去噪 |
 | **Firecrawl** | 整站爬取 → Markdown |
 | **SeeMore** | 检测 HTML 隐藏元素 |
+### AI Captcha Bypass 集成
+
+**项目**: [aydinnyunus/ai-captcha-bypass](https://github.com/aydinnyunus/ai-captcha-bypass)
+
+使用 GPT-4o / Gemini 2.5 自动解决验证码，Selenium 驱动 Firefox 执行。
+
+**支持的验证码类型**：
+
+| 类型 | 说明 | 成功率参考 |
+|------|------|-----------|
+| Text Captcha | 简单文字识别 | ~85% |
+| Complicated Text | 扭曲+噪声文字 | ~70% |
+| reCAPTCHA v2 | "I'm not a robot" 图像选择 | ~60-80% |
+| Puzzle Captcha | 滑动拼图 | ~75% |
+| Audio Captcha | 音频转写 | ~65% |
+
+**不支持的类型**（已知限制）：
+- ❌ **hCaptcha** — 仅支持 reCAPTCHA，hCaptcha 无解
+- ❌ **Cloudflare Turnstile**（新型无checkbox版）— 无法自动绕过
+- ❌ **Cloudflare JS Challenge**（纯JS版）— 需等待或降级到 Gemini MCP
+
+**使用条件**：
+- 用户提供 `OPENAI_API_KEY` 或 `GOOGLE_API_KEY`
+- 本地安装 Firefox 浏览器
+- 安装 ai-captcha-bypass（install.sh 自动完成）
+
+**触发场景**：
+- 页面检测到 reCAPTCHA v2（iframe 含 `google.com/recaptcha`）
+- 页面出现文字验证码输入框
+- 滑动拼图验证码（slider puzzle）
+- 自动填入求解结果，继续原爬取流程
+
+**.env 配置**（install.sh 会提示用户创建）：
+```
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=...
+```
+
+---
+
+
 | **LARA** | 页面相关性评分 |
 
 ---
@@ -976,3 +1087,47 @@ Phase 4: 生成报告（V1 报告 + 资源清单）
 
 **文档版本**: 2.0.0
 **更新日期**: 2026-03-01
+
+---
+
+## ⚠️ 全自动运行的已知限制
+
+以下限制为 V2.0 已知的系统性障碍，Claude 在执行时应主动识别并告知用户。
+
+### 高严重度（可直接阻断自动化）
+
+| 限制 | 说明 | 规避方案 |
+|------|------|----------|
+| **Cloudflare Turnstile**（新型） | 无 checkbox 的新型 CF 验证码，ai-captcha-bypass 不支持 | 切换到 google-gemini-mcp 搜索模式；或用户提供有效 cookies |
+| **hCaptcha** | ai-captcha-bypass 仅支持 reCAPTCHA，hCaptcha 无法自动解决 | 2Captcha / Anti-Captcha API（需付费账号）；或提供 cookies |
+| **IP 封禁** | 高频爬取触发论坛 IP 封禁（通常 403 或跳转 captcha） | 降低爬取频率；使用代理池（Bright Data / Oxylabs）；复用 cookies |
+| **付费内容/私群** | 核心内容需要付费订阅或邀请码 | 用户自行购买；Claude 无法替代 |
+
+### 中严重度（需要降级处理）
+
+| 限制 | 说明 | 规避方案 |
+|------|------|----------|
+| **Cloudflare JS Challenge** | 纯 JS 挑战页面，首次访问需通过浏览器检查 | 等待 5-10 秒后重试；或降级到 Gemini MCP |
+| **论坛登录频率限制** | 单账号每日登录次数有限（通常 3-5 次/天） | 复用 cookies（memory.json 已保存会话）；避免重复登录 |
+| **API Key 缺失** | Gemini MCP / ai-captcha-bypass 需要 API Key | 用户自备；或使用免费 tier；降级到纯 browser-use |
+| **百度网盘** | gallery-dl 不支持百度网盘下载 | 记录到 `links/baidu.json`，用户手动处理 |
+| **TurboBit/MegaUp 等待计时器** | 文件分享平台强制等待 30-60 秒 | browser-use 等待计时器完成；或记录链接用户手动处理 |
+
+### 低严重度（影响有限）
+
+| 限制 | 说明 | 规避方案 |
+|------|------|----------|
+| **macOS Safari 兼容性** | browser-use 对 Safari 支持有限 | 使用 Chrome/Chromium |
+| **视频平台地区限制** | YouTube/抖音等有地理限制 | yt-dlp 配合代理；或记录链接手动处理 |
+| **论坛账号被封** | 频繁登录异常可能导致账号被封 | 降低频率；使用 cookies 而非账密登录 |
+
+### Claude 主动告知规则
+
+当以下情况出现时，Claude **必须**告知用户并给出建议：
+1. 检测到 Cloudflare Turnstile / hCaptcha → "检测到 [X] 验证码，AI bypass 暂不支持。建议：提供 cookies / 使用 Gemini MCP / 手动处理"
+2. 连续 3 次访问返回 403 → "IP 被封禁，建议降低爬取频率或使用代理池"
+3. API Key 未配置但需要用到 → "需要 [工具名]，请在 .env 中配置 API_KEY"
+4. 达到登录频率上限 → "今日登录次数已达上限（X次），建议明天再爬，或使用其他账号"
+
+**文档版本**: 2.0.1
+**更新日期**: 2026-03-22

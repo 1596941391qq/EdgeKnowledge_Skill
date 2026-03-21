@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare-turnstile-bypass",
+  "version": "1.0.0",
+  "description": "A simple script to automate Cloudflare Turnstile token retrieval",
+  "main": "src/bypass.js",
+  "scripts": {
+    "start": "node src/bypass.js"
+  },
+  "keywords": ["cloudflare", "turnstile", "automation", "bypass"],
+  "type": "module",
+  "author": "JOBIANSTECHIE",
+  "license": "MIT",
+  "packageManager": "pnpm@10.11.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "patchright": "^1.57.0"
+  }
+}

@@ -109,6 +109,32 @@ fi
 PYTHON_VERSION=$($PYTHON --version 2>&1)
 echo -e "${GREEN}[✓]${NC} Found: $PYTHON_VERSION"
 
+
+# Find Node.js (for MCP servers - Gemini MCP)
+find_node() {
+    for cmd in node nodejs; do
+        if command -v $cmd &> /dev/null; then
+            echo $cmd; return
+        fi
+    done
+    echo ""
+}
+
+echo -e "${YELLOW}[?]${NC} Looking for Node.js (for Gemini MCP routing)..."
+NODE=$(find_node)
+if [[ -z "$NODE" ]]; then
+    echo -e "${RED}[✗]${NC} Node.js not found"
+    echo "    Gemini MCP routing requires Node.js for @modelcontextprotocol/server-gemini"
+    case $OS in
+        macos)  echo "    Install: brew install node" ;;
+        debian) echo "    Install: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -S bash && apt-get install -y nodejs" ;;
+        rhel)   echo "    Install: curl -fsSL https://rpm.nodesource.com/setup_20.x | bash && yum install -y nodejs" ;;
+        arch)   echo "    Install: sudo pacman -S --noconfirm nodejs npm" ;;
+    esac
+else
+    echo -e "${GREEN}[✓]${NC} Node.js: $($NODE --version 2>&1)"
+fi
+
 # Install system dependencies
 if [[ "$INSTALL_DEPS" == true ]]; then
     echo -e "${YELLOW}[?]${NC} Installing system dependencies..."
@@ -166,6 +192,26 @@ pip install -q playwright browser-use lxml beautifulsoup4 requests
 # Stitching projects (缝合项目)
 echo -e "${YELLOW}[?]${NC} Installing stitching tools..."
 pip install -q gallery-dl yt-dlp crawl4ai || echo -e "${YELLOW}[!]${NC} Some stitching tools may require manual install"
+# Install ai-captcha-bypass
+echo -e "${YELLOW}[?]${NC} Installing AI Captcha Bypass..."
+CAPTCHA_DIR="$HOME/ai-captcha-bypass"
+if [[ -d "$CAPTCHA_DIR" ]]; then
+    echo -e "${GREEN}[OK]${NC} ai-captcha-bypass already at $CAPTCHA_DIR"
+else
+    if command -v git &> /dev/null; then
+        git clone https://github.com/aydinnyunus/ai-captcha-bypass.git "$CAPTCHA_DIR" 2>/dev/null && \
+        echo -e "${GREEN}[OK]${NC} Cloned ai-captcha-bypass" || \
+        echo -e "${YELLOW}[!]${NC} git clone failed (git not installed?)"
+    else
+        echo -e "${YELLOW}[!]${NC} git not found, skipping ai-captcha-bypass clone"
+    fi
+fi
+if [[ -f "$CAPTCHA_DIR/requirements.txt" ]]; then
+    pip install -q -r "$CAPTCHA_DIR/requirements.txt" 2>/dev/null && \
+    echo -e "${GREEN}[OK]${NC} ai-captcha-bypass deps installed" || \
+    echo -e "${YELLOW}[!]${NC} Some captcha deps failed (check selenium installed manually)"
+fi
+
 
 # Optional but useful
 pip install -q trafilatura aiohttp httpx || true
@@ -175,6 +221,32 @@ echo -e "${GREEN}[✓]${NC} Python packages installed"
 # Install Playwright browsers
 echo -e "${YELLOW}[?]${NC} Installing Playwright browsers..."
 playwright install chromium 2>/dev/null || echo -e "${YELLOW}[!]${NC} Playwright browser install may need manual: playwright install"
+# Check / install Firefox (required for ai-captcha-bypass)
+echo -e "${YELLOW}[?]${NC} Checking Firefox (required for AI Captcha Bypass)..."
+FIREFOX_FOUND=false
+if command -v firefox &> /dev/null; then
+    FIREFOX_VERSION=$(firefox --version 2>&1 | head -1)
+    echo -e "${GREEN}[OK]${NC} Firefox: $FIREFOX_VERSION"
+    FIREFOX_FOUND=true
+fi
+if [[ "$OSTYPE" == "darwin"* ]] && [[ -d "/Applications/Firefox.app" ]]; then
+    echo -e "${GREEN}[OK]${NC} Firefox (macOS) found"
+    FIREFOX_FOUND=true
+fi
+if [[ -d "/c/Program Files/Mozilla Firefox" ]]; then
+    echo -e "${GREEN}[OK]${NC} Firefox (Windows) found"
+    FIREFOX_FOUND=true
+fi
+if [[ "$FIREFOX_FOUND" == false ]]; then
+    echo -e "${YELLOW}[!]${NC} Firefox not found. AI Captcha Bypass REQUIRES Firefox!"
+    case $OS in
+        macos)   echo "    Install: brew install --cask firefox" ;;
+        debian)  echo "    Install: sudo apt-get install -y firefox-esr" ;;
+        rhel)    echo "    Install: sudo yum install -y firefox" ;;
+        arch)    echo "    Install: sudo pacman -S --noconfirm firefox" ;;
+    esac
+fi
+
 
 # Find skill directory
 find_skill_dir() {
@@ -262,6 +334,21 @@ EOF
     echo -e "${GREEN}[✓]${NC} Created index.json"
 fi
 
+
+# Install Google Gemini MCP Server (npm global)
+echo -e "${YELLOW}[?]${NC} Installing Google Gemini MCP Server..."
+if [[ -n "$NODE" ]]; then
+    if npm list -g @modelcontextprotocol/server-gemini &> /dev/null; then
+        echo -e "${GREEN}[OK]${NC} @modelcontextprotocol/server-gemini already installed"
+    else
+        npm install -g @modelcontextprotocol/server-gemini 2>/dev/null && \
+        echo -e "${GREEN}[OK]${NC} Installed @modelcontextprotocol/server-gemini" || \
+        echo -e "${YELLOW}[!]${NC} Gemini MCP install failed (check GEMINI_API_KEY env var)"
+    fi
+else
+    echo -e "${YELLOW}[!]${NC} Skipping Gemini MCP (Node.js not found)"
+fi
+
 # Verify installation
 echo ""
 echo -e "${BLUE}═══════════════════════════════════════════════════════════${NC}"
@@ -305,6 +392,20 @@ echo -e "${BLUE}Quick Start:${NC}"
 echo "  1. Activate venv: source $VENV_DIR/bin/activate"
 echo "  2. Use the skill in Claude Code"
 echo "  3. Resources will be saved to: $RESOURCE_ROOT"
+echo ""
+echo -e "${YELLOW}=== IMPORTANT: API Keys Setup ===${NC}"
+echo "  AI Captcha Bypass needs API keys. Create/edit .env:"
+if [[ -d "$HOME/ai-captcha-bypass" ]]; then
+    echo "  $ nano $HOME/ai-captcha-bypass/.env"
+else
+    echo "  $ nano ~/ai-captcha-bypass/.env"
+fi
+echo "  Add ONE of:"
+echo "    OPENAI_API_KEY=sk-...    # for GPT-4o solver"
+echo "    GOOGLE_API_KEY=...       # for Gemini solver"
+echo ""
+echo "  For Gemini MCP routing (Tier 3):"
+echo "    export GEMINI_API_KEY=..."
 echo ""
 echo -e "${BLUE}Optional - Agent-Reach Setup:${NC}"
 echo "  git clone https://github.com/fatwang2/agent-reach.git"

@@ -38,7 +38,7 @@
     },
 
     "downloadLink": {
-      "description": "下载链��类信号",
+      "description": "下载链接类信号",
       "priority": "critical",
       "action": "download",
       "regex": [

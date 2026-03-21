@@ -1,0 +1,186 @@
+{
+  "version": "2.0.0",
+  "description": "MCP Server & 自动化工具配置",
+
+  "mcp_servers": {
+    "google-gemini-mcp": {
+      "name": "Google Gemini MCP",
+      "description": "Google Gemini 模型 MCP Server，支持深度网络搜索和内容分析",
+      "install_cmd": "npm install -g @modelcontextprotocol/server-gemini",
+      "config_env": ["GEMINI_API_KEY"],
+      "capabilities": [
+        "web_search",
+        "url_fetch",
+        "content_analysis",
+        "multimodal_understanding"
+      ],
+      "use_when": [
+        "需要深度搜索分析（>10个结果聚合）",
+        "需要理解复杂页面结构（多模态）",
+        "browser-use 被反爬阻断时",
+        "需要批量 URL 分析"
+      ],
+      "not_use_when": [
+        "需要截图+视觉识别（browser-use 更适合）",
+        "需要点击/滚动/登录交互（browser-use 更适合）",
+        "需要下载文件（gallery-dl/yt-dlp 更适合）"
+      ]
+    },
+    "ai-captcha-bypass": {
+      "name": "AI Captcha Bypass",
+      "description": "GPT-4o/Gemini 2.5 驱动验证码求解（Selenium + AI）",
+      "install_cmd": "git clone https://github.com/aydinnyunus/ai-captcha-bypass.git && cd ai-captcha-bypass && pip install -r requirements.txt",
+      "config_env": ["OPENAI_API_KEY", "GOOGLE_API_KEY"],
+      "requires_firefox": true,
+      "captcha_types": [
+        "text",
+        "complicated_text",
+        "recaptcha_v2",
+        "puzzle",
+        "audio"
+      ],
+      "use_when": [
+        "页面遇到 reCAPTCHA v2（'I'm not a robot'）",
+        "页面遇到文字验证码",
+        "页面遇到滑动拼图验证码",
+        "页面遇到音频验证码"
+      ],
+      "not_use_when": [
+        "可用 cookies 绕过登录墙（不需要 captcha bypass）",
+        "论坛允许游客浏览核心内容（不需要 captcha）",
+        "用户未提供 API key"
+      ]
+    }
+  },
+
+  "intelligent_router": {
+    "description": "三层浏览器/搜索工具智能路由引擎",
+    "strategy": "cost_optimization",
+    "tiers": [
+      {
+        "tier": 1,
+        "tool": "browser-use",
+        "priority": 1,
+        "use_when": [
+          "需要截图+视觉识别页面结构",
+          "需要点击/滚动/表单填写等交互",
+          "需要登录后访问受限内容",
+          "论坛使用 JS 渲染+懒加载"
+        ],
+        "cost": "free（本地 Playwright）",
+        "limitations": ["易被 Cloudflare/waf 阻断", "需要翻墙", "无法直接搜索（只能浏览）"]
+      },
+      {
+        "tier": 2,
+        "tool": "agent-browser",
+        "priority": 2,
+        "use_when": [
+          "重复性爬取任务（结构化提取）",
+          "需要引用式元素选择（@e1/@e2）",
+          "browser-use 失败时降级",
+          "需要脚本化多步操作"
+        ],
+        "cost": "free（Vercel CLI / 自托管）",
+        "limitations": ["配置复杂", "部分功能需要 Vercel 账号"]
+      },
+      {
+        "tier": 3,
+        "tool": "google-gemini-mcp",
+        "priority": 3,
+        "use_when": [
+          "browser-use / agent-browser 被反爬阻断",
+          "需要批量 URL 深度分析（>10页）",
+          "需要多模态理解复杂图表/截图",
+          "论坛强制 Cloudflare 保护且 cookies 失效"
+        ],
+        "cost": "API key 费用（按 token 计）",
+        "limitations": ["无法执行交互操作（点击/滚动）", "搜索结果依赖 Gemini 训练数据时效性"]
+      }
+    ],
+    "routing_rules": {
+      "default": "browser-use",
+      "cf_blocked": "fallback_to_gemini_mcp",
+      "login_required": "browser-use_with_cookies",
+      "captcha_detected": "ai-captcha-bypass",
+      "batch_analysis": "gemini_mcp",
+      "visual_heavy": "browser-use",
+      "download_only": "gallery-dl"
+    }
+  },
+
+  "automation_limitations": {
+    "description": "全自动运行中的已知限制",
+    "known_limits": [
+      {
+        "category": "反爬机制",
+        "item": "Cloudflare Turnstile",
+        "description": "新型 CF 验证码（无 checkbox），ai-captcha-bypass 不支持",
+        "severity": "high",
+        "workaround": "使用 cookies 绕过，或切换到 Gemini MCP"
+      },
+      {
+        "category": "反爬机制",
+        "item": "hCaptcha",
+        "description": "ai-captcha-bypass 仅支持 reCAPTCHA，不支持 hCaptcha",
+        "severity": "high",
+        "workaround": "2Captcha / Anti-Captcha API（需付费账号）"
+      },
+      {
+        "category": "反爬机制",
+        "item": "Cloudflare JS Challenge",
+        "description": "纯 JS 挑战页面，browser-use 可能无法直接绕过",
+        "severity": "medium",
+        "workaround": "等待 5 秒后重试（CF 自动放行）"
+      },
+      {
+        "category": "账号风险",
+        "item": "论坛登录频率限制",
+        "description": "单 IP/账号每日登录次数有限（通常 3-5 次）",
+        "severity": "medium",
+        "workaround": "使用 cookies 复用会话，避免重复登录"
+      },
+      {
+        "category": "账号风险",
+        "item": "IP 封禁",
+        "description": "高频爬取可能触发 IP 封禁",
+        "severity": "medium",
+        "workaround": "使用代理池（Bright Data / Oxylabs）或降低爬取频率"
+      },
+      {
+        "category": "内容限制",
+        "item": "付费内容/私帖",
+        "description": "部分论坛核心内容需要付费订阅或私群邀请码",
+        "severity": "medium",
+        "workaround": "用户需自行购买订阅或获取邀请码"
+      },
+      {
+        "category": "下载限制",
+        "item": "百度网盘",
+        "description": "gallery-dl 不支持，需要手动下载",
+        "severity": "medium",
+        "workaround": "记录到 links/baidu.json，用户手动处理"
+      },
+      {
+        "category": "下载限制",
+        "item": "TurboBit/MegaUp 等待时间",
+        "description": "文件分享平台有等待计时器（30-60秒）",
+        "severity": "low",
+        "workaround": "browser-use 等待计时器完成"
+      },
+      {
+        "category": "API 依赖",
+        "item": "OpenAI/Gemini API Key",
+        "description": "ai-captcha-bypass 和 Gemini MCP 依赖外部 API Key",
+        "severity": "medium",
+        "workaround": "用户需自备 API Key，或使用免费 tier"
+      },
+      {
+        "category": "平台兼容性",
+        "item": "macOS Safari",
+        "description": "browser-use 对 Safari 支持有限",
+        "severity": "low",
+        "workaround": "使用 Chrome/Chromium"
+      }
+    ]
+  }
+}

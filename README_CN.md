@@ -62,13 +62,60 @@ V2 新增激进的资源获取能力：
 | **🔗 深水区钻取** | 外链跟踪、作者追踪、评论区挖掘 |
 | **🧵 工具集成** | Agent-Reach、gallery-dl、yt-dlp、Crawl4AI 就绪 |
 
-## 📦 安装
+## 🚀 快速安装
 
-将此 skill 复制到 Claude Code 的 skills 目录：
+```bash
+git clone https://github.com/1596941391qq/EdgeKnowledge_Skill.git
+cd EdgeKnowledge_Skill
+chmod +x install.sh
+./install.sh
+```
+
+或将此 skill 复制到 Claude Code 的 skills 目录：
 
 ```bash
 cp -r edge-knowledge ~/.claude/skills/
 ```
+
+
+## 🔄 MCP 工具路由 (V2)
+
+V2 内置**三层智能路由引擎**，自动为每个任务选择最优工具——成本优先 + 成功率保障。
+
+### 工具层级
+
+| 层级 | 工具 | 成本 | 最佳场景 |
+|------|------|------|----------|
+| **Tier 1** | `browser-use` | 免费（本地 Playwright） | 截图+视觉识别、点击/滚动/表单交互、JS懒加载、登录后访问 |
+| **Tier 2** | `agent-browser` | 免费（Vercel CLI） | 重复性结构化提取、@e1/@e2 元素选择、脚本化多步操作 |
+| **Tier 3** | `google-gemini-mcp` | API key（按token计费） | 绕过反爬阻断、批量URL分析（>10页）、复杂多模态理解 |
+
+### 路由决策规则
+
+```
+IF captcha_detected AND captcha_type == "recaptcha_v2":
+    → ai-captcha-bypass（GPT-4o 或 Gemini 2.5）→ 重试
+
+IF cloudflare_blocked AND browser_use_failed:
+    → google-gemini-mcp（Tier 3）
+
+IF batch_analysis AND urls > 10:
+    → google-gemini-mcp（并发分析）
+
+IF visual_heavy AND needs_screenshot:
+    → browser-use（Tier 1）
+
+IF download_only:
+    → gallery-dl / yt-dlp（不经浏览器）
+```
+
+### MCP Server 配置
+
+所有 MCP Server 配置集中在 `mcp_config.json`：
+- **`google-gemini-mcp`** — Gemini 2.5 深度搜索、URL 获取、多模态分析
+- **`ai-captcha-bypass`** — GPT-4o / Gemini 驱动验证码求解（Selenium + Firefox）
+
+
 
 ## ⚙️ 配置文件说明
 
@@ -262,6 +309,22 @@ resources/
 3. **阶段3：内容分析** - 识别边缘知识、骚人、资源
 4. **阶段4：生成报告** - 输出结构化 Markdown 报告
 
+
+
+## 🛠️ 内置工具模块
+
+以下工具目录为边缘场景自动化提供支持：
+
+| 目录 | 工具 | 用途 |
+|------|------|------|
+| `temp_captcha/` | [ai-captcha-bypass](https://github.com/aydinnyunus/ai-captcha-bypass) | GPT-4o / Gemini 驱动验证码求解（reCAPTCHA v2、文字、滑块、音频） |
+| `temp_cf/` | Cloudflare Turnstile Bypass（DrissionPage） | DrissionPage + ChromiumPage CF Turnstile Token 提取器 |
+| `temp_turnstile/` | [cloudflare-turnstile-bypass](https://github.com/jobians/cloudflare-turnstile-bypass) | Patchright + Node.js CF Turnstile 求解器 |
+| `rules/access-control.md` | — | 权限边界与授权声明 |
+| `mcp_config.json` | — | MCP Server 与工具路由集中配置 |
+
+所有工具由路由引擎自动调用，无需手动配置。
+
 ## 📚 部分使用论坛
 
 | 排名 | 论坛 | 评分 | 成本 | 适合人群 |
@@ -309,8 +372,11 @@ resources/
 
 ### 依赖
 - Claude Code CLI
-- browser-use skill
+- browser-use skill / agent-browser skill
 - Python 3.8+
+
+### 跨平台安装脚本
+`install.sh` 自动识别 **macOS**、**Ubuntu/Debian**、**CentOS/RHEL**、**Arch Linux**，安装系统依赖、配置 Playwright、设置 MCP Server。
 
 ### V2 额外依赖
 ```bash

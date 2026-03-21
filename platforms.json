@@ -32,6 +32,48 @@
       "domains": ["dropbox.com"],
       "tool": "gallery-dl",
       "requiresAuth": false
+    },
+    "megaup": {
+      "name": "MegaUp",
+      "domains": ["megaup.net"],
+      "tool": "gallery-dl",
+      "requiresAuth": false
+    },
+    "rapidgator": {
+      "name": "RapidGator",
+      "domains": ["rapidgator.net"],
+      "tool": "manual",
+      "requiresAuth": false
+    },
+    "nitroflare": {
+      "name": "Nitroflare",
+      "domains": ["nitroflare.com"],
+      "tool": "manual",
+      "requiresAuth": false
+    },
+    "uploadgig": {
+      "name": "UploadGig",
+      "domains": ["uploadgig.com"],
+      "tool": "manual",
+      "requiresAuth": false
+    },
+    "1fichier": {
+      "name": "1fichier",
+      "domains": ["1fichier.com"],
+      "tool": "manual",
+      "requiresAuth": false
+    },
+    "zippyshare": {
+      "name": "ZippyShare",
+      "domains": ["zippyshare.com"],
+      "tool": "manual",
+      "requiresAuth": false
+    },
+    "turbobit": {
+      "name": "TurboBit",
+      "domains": ["turb.to", "turbobit.net"],
+      "tool": "manual",
+      "requiresAuth": false
     }
   },
 

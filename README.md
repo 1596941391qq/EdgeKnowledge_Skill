@@ -62,13 +62,60 @@ V2 adds aggressive resource acquisition capabilities:
 | **🔗 Deep Dive Tracking** | External link follow, Author tracking, Comment section mining |
 | **🧵 Tool Integration** | Agent-Reach, gallery-dl, yt-dlp, Crawl4AI ready |
 
-## 📦 Installation
+## 🚀 Quick Install
 
-Copy this skill to Claude Code's skills directory:
+```bash
+git clone https://github.com/1596941391qq/EdgeKnowledge_Skill.git
+cd EdgeKnowledge_Skill
+chmod +x install.sh
+./install.sh
+```
+
+Or copy this skill to Claude Code's skills directory:
 
 ```bash
 cp -r edge-knowledge ~/.claude/skills/
 ```
+
+
+## 🔄 MCP Tool Routing (V2)
+
+V2 includes an **intelligent three-tier routing engine** that automatically selects the best tool for each task — cost-first with fallback guarantees.
+
+### Tool Tiers
+
+| Tier | Tool | Cost | Best For |
+|------|------|------|----------|
+| **Tier 1** | `browser-use` | Free (local Playwright) | Screenshot + visual recognition, clicks/scrolls/forms, JS lazy-load, post-login access |
+| **Tier 2** | `agent-browser` | Free (Vercel CLI) | Repetitive structured extraction, @e1/@e2 element selection, scripted multi-step operations |
+| **Tier 3** | `google-gemini-mcp` | API key (per-token) | Bypassing anti-bot blocks, batch URL analysis (>10 pages), complex multimodal understanding |
+
+### Routing Rules
+
+```
+IF captcha_detected AND captcha_type == "recaptcha_v2":
+    → ai-captcha-bypass (GPT-4o or Gemini 2.5) → retry
+
+IF cloudflare_blocked AND browser_use_failed:
+    → google-gemini-mcp (Tier 3)
+
+IF batch_analysis AND urls > 10:
+    → google-gemini-mcp (concurrent)
+
+IF visual_heavy AND needs_screenshot:
+    → browser-use (Tier 1)
+
+IF download_only:
+    → gallery-dl / yt-dlp (bypasses browser)
+```
+
+### MCP Server Config
+
+All MCP server configurations are in `mcp_config.json`:
+- **`google-gemini-mcp`** — Gemini 2.5 depth search, URL fetch, multimodal analysis
+- **`ai-captcha-bypass`** — GPT-4o / Gemini-driven CAPTCHA solving (Selenium + Firefox)
+
+
 
 ## ⚙️ Configuration Files
 
@@ -262,6 +309,22 @@ Use edge-knowledge to find cracked SEO tools and automation software
 3. **Stage 3: Content Analysis** - Identifies edge knowledge, power users, resources
 4. **Stage 4: Report Generation** - Outputs structured Markdown report
 
+
+
+## 🛠️ Bundled Tool Modules
+
+The following tool directories are included for edge-case automation needs:
+
+| Directory | Tool | Purpose |
+|-----------|------|---------|
+| `temp_captcha/` | [ai-captcha-bypass](https://github.com/aydinnyunus/ai-captcha-bypass) | GPT-4o / Gemini-driven CAPTCHA solving (reCAPTCHA v2, text, puzzle, audio) |
+| `temp_cf/` | Cloudflare Turnstile Bypass (DrissionPage) | CF Turnstile token fetcher using ChromiumPage |
+| `temp_turnstile/` | [cloudflare-turnstile-bypass](https://github.com/jobians/cloudflare-turnstile-bypass) | Patchright + Node.js CF Turnstile solver |
+| `rules/access-control.md` | — | Access control & authorization boundary definition |
+| `mcp_config.json` | — | Central MCP server & tool routing configuration |
+
+All tools are called automatically by the routing engine when triggered.
+
 ## 📚 Supported Forums (Partial List)
 
 | Rank | Forum | Rating | Cost | Target Audience |
@@ -309,8 +372,11 @@ Generated reports contain three-layer analysis:
 
 ### Dependencies
 - Claude Code CLI
-- browser-use skill
+- browser-use skill / agent-browser skill
 - Python 3.8+
+
+### Cross-Platform Installer
+`install.sh` auto-detects **macOS**, **Ubuntu/Debian**, **CentOS/RHEL**, and **Arch Linux**, installs system packages, configures Playwright, and sets up MCP servers.
 
 ### V2 Additional Dependencies
 ```bash
