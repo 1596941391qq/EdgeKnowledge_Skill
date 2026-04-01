@@ -474,3 +474,17 @@ Issues and Pull Requests are welcome!
 - Steps to reproduce (for bugs)
 - Expected vs actual behavior
 - Your environment (OS, Claude Code version)
+## OpenCLI Integration
+
+This local skill now ships with a Windows PowerShell OpenCLI layer:
+
+- `scripts/setup-opencli.ps1`
+- `scripts/test-opencli.ps1`
+- `scripts/invoke-opencli.ps1`
+
+Recommended order:
+
+1. Install and enable the Chrome extension named `Browser Bridge`
+2. Run `scripts/setup-opencli.ps1`
+3. Use `scripts/invoke-opencli.ps1` for browser-backed OpenCLI commands
+4. Fall back to the existing `browser-use`, MCP, or custom forum flows when OpenCLI does not cover the target workflow

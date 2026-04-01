@@ -1131,3 +1131,17 @@ Phase 4: 生成报告（V1 报告 + 资源清单）
 
 **文档版本**: 2.0.1
 **更新日期**: 2026-03-22
+## OpenCLI Integration Rules
+
+This skill now has a local OpenCLI invocation layer:
+
+- `scripts/setup-opencli.ps1`
+- `scripts/test-opencli.ps1`
+- `scripts/invoke-opencli.ps1`
+
+Execution policy:
+
+1. If the task matches an existing OpenCLI site command and benefits from Browser Bridge, prefer `invoke-opencli.ps1`
+2. If Browser Bridge is not connected, surface that failure clearly and suggest enabling the extension in Chrome
+3. If the target forum or workflow is not supported by OpenCLI, fall back to the existing `browser-use`, MCP, or custom script route
+4. Do not replace forum-specific scripts when they already solve the task better than a generic OpenCLI command
