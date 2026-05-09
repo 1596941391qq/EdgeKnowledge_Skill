@@ -1,4 +1,0 @@
-loguru
-DrissionPage
-attrs
-aiohttp
