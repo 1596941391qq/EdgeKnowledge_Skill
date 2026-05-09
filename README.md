@@ -315,17 +315,32 @@ Use edge-knowledge to find cracked SEO tools and automation software
 
 ## 🛠️ Bundled Tool Modules
 
-The following tool directories are included for edge-case automation needs:
+The following modules are included for edge-case automation needs:
 
-| Directory | Tool | Purpose |
-|-----------|------|---------|
-| `temp_captcha/` | [ai-captcha-bypass](https://github.com/aydinnyunus/ai-captcha-bypass) | GPT-4o / Gemini-driven CAPTCHA solving (reCAPTCHA v2, text, puzzle, audio) |
-| `temp_cf/` | Cloudflare Turnstile Bypass (DrissionPage) | CF Turnstile token fetcher using ChromiumPage |
-| `temp_turnstile/` | [cloudflare-turnstile-bypass](https://github.com/jobians/cloudflare-turnstile-bypass) | Patchright + Node.js CF Turnstile solver |
-| `rules/access-control.md` | — | Access control & authorization boundary definition |
-| `mcp_config.json` | — | Central MCP server & tool routing configuration |
+| Module | Purpose |
+|--------|---------|
+| `rules/access-control.md` | Access control & authorization boundary definition |
+| `mcp_config.json` | Central MCP server & tool routing configuration |
+| `cdp-scripts/` | CDP-based forum crawlers (see CDP Scripts section below) |
 
 All tools are called automatically by the routing engine when triggered.
+
+## CDP Scripts
+
+Browser automation crawlers using Chrome DevTools Protocol for targeted forum mining:
+
+| Script | Target | What it does |
+|---|---|---|
+| `bhw-crawler.mjs` | BlackHatWorld | Thread listing crawler |
+| `bhw-crawler-v2.mjs` | BlackHatWorld | V2 with value signal detection |
+| `bhw-detail-crawler.mjs` | BlackHatWorld | Deep thread content extraction |
+| `bhw-backlink-scrape.mjs` | BlackHatWorld | Backlink opportunity scraper |
+| `bhw-vendor-verify.mjs` | BlackHatWorld | Vendor/service verification |
+| `cdp-batch-bbhf.mjs` | BestBlackHatForum | Batch forum crawler |
+| `cdp-bbhf-threads.mjs` | BestBlackHatForum | Thread detail extractor |
+| `cdp-buildersociety.mjs` | BuilderSociety | Forum crawler |
+| `cdp-buildersociety-v2.mjs` | BuilderSociety | V2 enhanced extraction |
+| `scrape-onehack.mjs` | OneHack | Content scraper |
 
 ## 📚 Supported Forums (Partial List)
 
