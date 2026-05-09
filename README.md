@@ -1,3 +1,5 @@
+[![GitHub stars](https://img.shields.io/github/stars/1596941391qq/EdgeKnowledge_Skill?style=social)](https://github.com/1596941391qq/EdgeKnowledge_Skill/stargazers) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/) [![Pipeline](https://img.shields.io/badge/Pipeline-2%20of%203-6e40c9.svg)](#pipeline)
+
 # Edge Knowledge
 
 > **[Chinese Documentation](./README_CN.md)** | **English Documentation**
