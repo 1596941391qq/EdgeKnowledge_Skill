@@ -1,4 +1,4 @@
-[![GitHub stars](https://img.shields.io/github/stars/1596941391qq/EdgeKnowledge_Skill?style=social)](https://github.com/1596941391qq/EdgeKnowledge_Skill/stargazers) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/) [![Pipeline](https://img.shields.io/badge/Pipeline-2%20of%203-6e40c9.svg)](#pipeline)
+[![GitHub stars](https://img.shields.io/github/stars/1596941391qq/EdgeKnowledge_Skill?style=social)](https://github.com/1596941391qq/EdgeKnowledge_Skill/stargazers) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/) [![Pipeline](https://img.shields.io/badge/Pipeline-3%20of%203-6e40c9.svg)](#pipeline)
 
 # Edge Knowledge
 
@@ -63,6 +63,19 @@ V2 adds aggressive resource acquisition capabilities:
 | **📦 Resource Downloader** | Downloads ALL file types (.exe/.bat/.torrent), maintains completeness |
 | **🔗 Deep Dive Tracking** | External link follow, Author tracking, Comment section mining |
 | **🧵 Tool Integration** | Agent-Reach, gallery-dl, yt-dlp, Crawl4AI ready |
+
+### 🆕 V3: Freshness & Credibility (NEW!)
+
+V2 could grab resources. V3 makes sure what you grab is **fresh** and **trustworthy** — because edge knowledge decays, and an opinion is not a tactic.
+
+| Feature | Description |
+|---------|-------------|
+| **🌐 GEO/AEO Edge Category** | The frontier moved. New `GEO_Edge_Search` category + `GEO_AI_Visibility` strategy target the freshest, least-saturated edge: getting cited by ChatGPT/Perplexity/Gemini, intercepting AI Overview traffic, engineering LLM visibility — before the playbooks go mainstream |
+| **⏳ Freshness Contract** | Every source now carries `last_verified` / `activity_status` / `freshness_score`. Stale pools get down-ranked, declining ones flagged for re-verification (`reverify_after_days: 90`). "Freshness" stops being a slogan and becomes a mechanism |
+| **🎯 Credibility Scoring** | `credibilityScoring` turns the *trustworthy* characteristic into a computable score. Concrete numbers, real pricing, and case evidence score high; pure opinion gets penalized. Extracted knowledge is ranked by evidence strength before it lands in a report |
+
+**Why V3 matters:** A forum that was gold in 2024 may be dead in 2026. A reply with "$30 CPA, 14-day ROI, ran it on 3 accounts" is worth more than "I think this should work." V3 encodes both judgments so the system stops treating all signals as equal.
+
 
 ## 🚀 Quick Install
 
@@ -505,3 +518,18 @@ Recommended order:
 2. Run `scripts/setup-opencli.ps1`
 3. Use `scripts/invoke-opencli.ps1` for browser-backed OpenCLI commands
 4. Fall back to the existing `browser-use`, MCP, or custom forum flows when OpenCLI does not cover the target workflow
+
+## 🗺️ V3 Roadmap — Community Track
+
+V3 shipped the **mechanism layer** (freshness fields, GEO category, credibility scoring). The **refinement layer** below is where the real depth lives — and where community contributions are most welcome. These are hard, open problems:
+
+| Track | Problem | Contribution opportunity |
+|-------|---------|--------------------------|
+| **Source-first mining** | Keyword-driven search misses knowledge you didn't know to look for. Can the crawler read a high-signal source *first*, then let topics emerge from what it finds? | A mode that ingests a source fully and surfaces emergent topics, instead of matching pre-set keywords |
+| **Gap-driven scheduling** | What should you mine next? Today it's manual. Could the system detect where it already has dense raw material but no synthesized output, and prioritize that? | A `gap-assessment` pass that ranks "ready-to-synthesize" topics by raw-material density |
+| **Incremental de-dup** | Re-crawling a source re-reports everything. It should only surface the *net new* since last run. | A knowledge-signature store so repeat crawls emit deltas, not full dumps |
+| **Provenance & contradiction** | Credibility scoring is a start. Production-grade verification means tagging every claim's provenance, cross-checking freshness, and flagging contradictions without inflating the report. | A provenance layer that tags each extracted claim (first-hand / cross-verified / unverified) and surfaces conflicts |
+| **Reader-grade output** | Raw reports read like crawl logs. The endgame is wiki-grade knowledge: synthesized, cross-referenced, source-anonymized, no outline-stubs. | A post-processing pass that turns extraction dumps into standalone knowledge articles |
+
+> 🤝 Pick a track, open a branch (e.g. `source-first`, `incremental-dedup`), and PR it. These are the problems that separate a scraper from a knowledge engine.
+

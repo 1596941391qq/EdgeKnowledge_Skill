@@ -1,4 +1,14 @@
 {
+  "schema_version": "3.0.0",
+  "freshness_policy": {
+    "description": "Edge knowledge decays. A forum that was gold in 2024 may be dead in 2026. Every source carries a freshness contract so the system can down-rank stale pools and surface declining ones for re-verification.",
+    "fields": {
+      "last_verified": "ISO date the source was last confirmed active and high-signal",
+      "activity_status": "active | declining | dormant | dead — based on recent posting density",
+      "freshness_score": "0-10, decays from last_verified; <5 triggers re-verification before use"
+    },
+    "reverify_after_days": 90
+  },
   "categories": {
     "Q&A_Search": {
       "description": "Suitable for mining deep discussions and real user feedback in comment sections",
@@ -10,7 +20,10 @@
           "cost": "Free",
           "reason": "Even though AI often quotes Reddit, the real value is hidden in the comment sections",
           "target_audience": "Everyone",
-          "tags": ["Q&A", "Comments", "Real Feedback", "Community Discussion"]
+          "tags": ["Q&A", "Comments", "Real Feedback", "Community Discussion"],
+          "last_verified": "2026-06-09",
+          "activity_status": "active",
+          "freshness_score": 10
         }
       ]
     },
@@ -25,143 +38,69 @@
           "reason": "Lots of edge tactics, highly recommend slenderman's posts",
           "target_audience": "Everyone",
           "tags": ["Black Hat", "Gray Techniques", "Edge Knowledge", "Advanced Tech"],
-          "recommended_authors": ["slenderman"]
+          "recommended_authors": ["slenderman"],
+          "last_verified": "2026-06-09",
+          "activity_status": "active",
+          "freshness_score": 9
+        }
+      ]
+    },
+    "GEO_Edge_Search": {
+      "description": "The frontier moved. In 2026, edge knowledge is no longer just ranking #1 on Google — it's getting cited by ChatGPT/Perplexity/Gemini, intercepting AI Overview traffic, and engineering AI visibility. These tactics are surfacing on the same forums but are not yet consensus. Highest freshness, lowest saturation.",
+      "forums": [
+        {
+          "name": "BlackHatWorld (AI/GEO subforums)",
+          "url": "https://blackhatworld.com",
+          "rating": 9,
+          "cost": "Free",
+          "reason": "Early threads on AI Overview interception, LLM citation hacking, and GEO arbitrage before they go mainstream",
+          "target_audience": "GEO/AEO Operators",
+          "tags": ["GEO", "AEO", "AI Visibility", "LLM Citation", "AI Overview"],
+          "last_verified": "2026-06-09",
+          "activity_status": "active",
+          "freshness_score": 10
+        },
+        {
+          "name": "Reddit (r/GEO, r/SEO, r/artificial)",
+          "url": "https://reddit.com/r/GEO",
+          "rating": 9,
+          "cost": "Free",
+          "reason": "Practitioners posting live experiments on Perplexity/ChatGPT visibility before the playbooks are written",
+          "target_audience": "GEO Practitioners",
+          "tags": ["GEO", "AEO", "AI Search", "Experiments", "Real Data"],
+          "last_verified": "2026-06-09",
+          "activity_status": "active",
+          "freshness_score": 10
         }
       ]
     },
     "Deep_Dive_Forums": {
       "description": "Deep content that others don't know about when you have information anxiety",
       "forums": [
-        {
-          "rank": 1,
-          "name": "GreyHatMafia",
-          "url": "https://greyhatmafia.com",
-          "rating": 9.5,
-          "cost": "Free",
-          "target_audience": "Everyone",
-          "tags": ["Gray Hat", "General Marketing", "High Quality"]
-        },
-        {
-          "rank": 2,
-          "name": "AffLIFT",
-          "url": "https://afflift.com",
-          "rating": 9.5,
-          "cost": "$20/month",
-          "target_audience": "Affiliate Beginners to Advanced",
-          "tags": ["Affiliate Marketing", "Affiliate", "Advanced"]
-        },
-        {
-          "rank": 3,
-          "name": "StackThatMoney",
-          "url": "https://stackthatmoney.com",
-          "rating": 9.5,
-          "cost": "$99/month",
-          "target_audience": "Professional Affiliates",
-          "tags": ["Affiliate Marketing", "Affiliate", "Professional", "Premium"]
-        },
-        {
-          "rank": 4,
-          "name": "SEO Isn't Dead",
-          "url": "https://seoisntdead.com",
-          "rating": 9,
-          "cost": "Free",
-          "target_audience": "SEO Practitioners",
-          "tags": ["SEO", "Search Engine Optimization", "Technical"]
-        },
-        {
-          "rank": 5,
-          "name": "iAmAffiliate",
-          "url": "https://iamaffiliate.com",
-          "rating": 9,
-          "cost": "$50/month",
-          "target_audience": "Advanced Affiliates",
-          "tags": ["Affiliate Marketing", "Affiliate", "Advanced"]
-        },
-        {
-          "rank": 6,
-          "name": "BlackHatWorld",
-          "url": "https://blackhatworld.com",
-          "rating": 8.5,
-          "cost": "Free",
-          "target_audience": "General Marketing",
-          "tags": ["Black Hat", "General Marketing", "Traffic", "SEO"]
-        },
-        {
-          "rank": 7,
-          "name": "BossCourses",
-          "url": "https://bosscourses.com",
-          "rating": 8.5,
-          "cost": "$35/course",
-          "target_audience": "Course Learners",
-          "tags": ["Courses", "Learning", "Tutorials"]
-        },
-        {
-          "rank": 8,
-          "name": "WickedFire",
-          "url": "https://wickedfire.com",
-          "rating": 8,
-          "cost": "Free",
-          "target_audience": "Affiliate Beginners",
-          "tags": ["Affiliate Marketing", "Affiliate", "Beginners"]
-        },
-        {
-          "rank": 9,
-          "name": "Affiliate World",
-          "url": "https://affiliateworld.com",
-          "rating": 8,
-          "cost": "$99/month",
-          "target_audience": "Premium Networking",
-          "tags": ["Affiliate Marketing", "Affiliate", "Networking", "Premium"]
-        },
-        {
-          "rank": 10,
-          "name": "Cracked.to",
-          "url": "https://cracked.to",
-          "rating": 7.5,
-          "cost": "Free",
-          "target_audience": "Tool Seekers",
-          "tags": ["Tools", "Cracked", "Resources"]
-        },
-        {
-          "rank": 11,
-          "name": "OneHack",
-          "url": "https://onehack.us",
-          "rating": 7.5,
-          "cost": "Free",
-          "target_audience": "Tech + Marketing",
-          "tags": ["Technical", "Marketing", "General"]
-        },
-        {
-          "rank": 12,
-          "name": "Digital Point",
-          "url": "https://digitalpoint.com",
-          "rating": 7,
-          "cost": "Free",
-          "target_audience": "Beginners",
-          "tags": ["Beginners", "Entry Level", "General"]
-        },
-        {
-          "rank": 13,
-          "name": "Warrior Forum",
-          "url": "https://warriorforum.com",
-          "rating": 7,
-          "cost": "Free",
-          "target_audience": "Product Research",
-          "tags": ["Products", "Research", "Marketing"]
-        },
-        {
-          "rank": 14,
-          "name": "Nulled.to",
-          "url": "https://nulled.to",
-          "rating": 7,
-          "cost": "Free",
-          "target_audience": "Tool Seekers",
-          "tags": ["Tools", "Nulled", "Resources"]
-        }
+        {"rank": 1, "name": "GreyHatMafia", "url": "https://greyhatmafia.com", "rating": 9.5, "cost": "Free", "target_audience": "Everyone", "tags": ["Gray Hat", "General Marketing", "High Quality"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 9},
+        {"rank": 2, "name": "AffLIFT", "url": "https://afflift.com", "rating": 9.5, "cost": "$20/month", "target_audience": "Affiliate Beginners to Advanced", "tags": ["Affiliate Marketing", "Affiliate", "Advanced"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 9},
+        {"rank": 3, "name": "StackThatMoney", "url": "https://stackthatmoney.com", "rating": 9.5, "cost": "$99/month", "target_audience": "Professional Affiliates", "tags": ["Affiliate Marketing", "Affiliate", "Professional", "Premium"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 8},
+        {"rank": 4, "name": "SEO Isn't Dead", "url": "https://seoisntdead.com", "rating": 9, "cost": "Free", "target_audience": "SEO Practitioners", "tags": ["SEO", "Search Engine Optimization", "Technical"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 8},
+        {"rank": 5, "name": "iAmAffiliate", "url": "https://iamaffiliate.com", "rating": 9, "cost": "$50/month", "target_audience": "Advanced Affiliates", "tags": ["Affiliate Marketing", "Affiliate", "Advanced"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 8},
+        {"rank": 6, "name": "BlackHatWorld", "url": "https://blackhatworld.com", "rating": 8.5, "cost": "Free", "target_audience": "General Marketing", "tags": ["Black Hat", "General Marketing", "Traffic", "SEO"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 9},
+        {"rank": 7, "name": "BossCourses", "url": "https://bosscourses.com", "rating": 8.5, "cost": "$35/course", "target_audience": "Course Learners", "tags": ["Courses", "Learning", "Tutorials"], "last_verified": "2026-06-09", "activity_status": "declining", "freshness_score": 6},
+        {"rank": 8, "name": "WickedFire", "url": "https://wickedfire.com", "rating": 8, "cost": "Free", "target_audience": "Affiliate Beginners", "tags": ["Affiliate Marketing", "Affiliate", "Beginners"], "last_verified": "2026-06-09", "activity_status": "declining", "freshness_score": 5},
+        {"rank": 9, "name": "Affiliate World", "url": "https://affiliateworld.com", "rating": 8, "cost": "$99/month", "target_audience": "Premium Networking", "tags": ["Affiliate Marketing", "Affiliate", "Networking", "Premium"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 7},
+        {"rank": 10, "name": "Cracked.to", "url": "https://cracked.to", "rating": 7.5, "cost": "Free", "target_audience": "Tool Seekers", "tags": ["Tools", "Cracked", "Resources"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 7},
+        {"rank": 11, "name": "OneHack", "url": "https://onehack.us", "rating": 7.5, "cost": "Free", "target_audience": "Tech + Marketing", "tags": ["Technical", "Marketing", "General"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 7},
+        {"rank": 12, "name": "Digital Point", "url": "https://digitalpoint.com", "rating": 7, "cost": "Free", "target_audience": "Beginners", "tags": ["Beginners", "Entry Level", "General"], "last_verified": "2026-06-09", "activity_status": "declining", "freshness_score": 4},
+        {"rank": 13, "name": "Warrior Forum", "url": "https://warriorforum.com", "rating": 7, "cost": "Free", "target_audience": "Product Research", "tags": ["Products", "Research", "Marketing"], "last_verified": "2026-06-09", "activity_status": "declining", "freshness_score": 4},
+        {"rank": 14, "name": "Nulled.to", "url": "https://nulled.to", "rating": 7, "cost": "Free", "target_audience": "Tool Seekers", "tags": ["Tools", "Nulled", "Resources"], "last_verified": "2026-06-09", "activity_status": "active", "freshness_score": 6}
       ]
     }
   },
   "search_strategies": {
+    "GEO_AI_Visibility": {
+      "keywords": ["GEO", "generative engine optimization", "AI Overview", "ChatGPT citation", "Perplexity ranking", "LLM visibility", "AI search optimization", "answer engine optimization", "AEO"],
+      "recommended_forums": ["BlackHatWorld (AI/GEO subforums)", "Reddit (r/GEO, r/SEO, r/artificial)", "GreyHatMafia"],
+      "focus": "How to get cited by AI engines, intercept AI Overview traffic, and engineer LLM visibility before the playbooks go mainstream",
+      "freshness_priority": "highest"
+    },
     "Instagram_Growth": {
       "keywords": ["instagram", "instagram growth", "instagram followers", "instagram engagement", "SMM panel", "social media marketing", "buy followers", "growth service"],
       "recommended_forums": ["GreyHatMafia", "BlackHatWorld", "Reddit", "BestBlackHatForum"],
@@ -184,4 +123,3 @@
     }
   }
 }
-

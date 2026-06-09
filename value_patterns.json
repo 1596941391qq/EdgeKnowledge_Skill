@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "description": "价值信号识别模式库",
+  "version": "3.0.0",
+  "description": "价值信号识别模式库 + 置信度启发式打分",
 
   "patterns": {
     "replyToUnlock": {
@@ -113,5 +113,42 @@
       "freshness": 10
     },
     "threshold": 50
+  },
+
+  "credibilityScoring": {
+    "description": "Credibility heuristic — turns the 'trustworthy' characteristic from an adjective into a computable score. A claim backed by concrete data (numbers, prices, case counts) is worth more than an opinion. Use this to rank extracted knowledge by evidence strength before writing it into any report.",
+    "signals": {
+      "hasConcreteNumbers": {
+        "weight": 25,
+        "description": "Specific figures: success rates, traffic counts, ranking positions, timeframes",
+        "regex": ["\\d+%", "\\$\\d+", "\\d+\\s*(days?|weeks?|months?)", "\\d+x", "\\d{2,}\\s*(backlinks?|keywords?|posts?|accounts?)"]
+      },
+      "hasPricing": {
+        "weight": 20,
+        "description": "Real cost data signals first-hand experience, not theory",
+        "regex": ["\\$\\d+", "\\d+\\s*(usd|dollars?)", "per\\s*(month|article|link|click)", "/mo", "/month"]
+      },
+      "hasCaseEvidence": {
+        "weight": 25,
+        "description": "Concrete case references: 'I ran X for Y and got Z'",
+        "regex": ["case study", "my (site|account|client)", "i (tested|ran|tried)", "results?:", "before.{0,20}after", "实测", "亲测", "案例"]
+      },
+      "hasTimeframe": {
+        "weight": 10,
+        "description": "Recent date anchors signal freshness and verifiability",
+        "regex": ["202[5-9]", "this (year|month|week)", "recently", "last (month|week)"]
+      },
+      "opinionOnly": {
+        "weight": -15,
+        "description": "Penalty: pure opinion with no evidence — 'I think', 'probably', 'should work'",
+        "regex": ["i think", "probably", "should work", "in my opinion", "maybe", "i guess", "我觉得", "应该可以"]
+      }
+    },
+    "tiers": {
+      "high": "score >= 50 — evidence-backed, safe to surface as primary finding",
+      "medium": "score 20-49 — partial evidence, surface with caveat",
+      "low": "score < 20 — opinion-grade, log but do not feature"
+    },
+    "note": "This is a public, generic evidence-strength heuristic. Production-grade source verification (provenance tagging, freshness cross-checks, contradiction detection) is a deeper discipline — see the V3 Roadmap in README for the community track."
   }
 }
